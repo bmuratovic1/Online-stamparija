@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnliStam.Pomocnici", "OnliStam.Pomocnici\OnliStam.Pomocnici.csproj", "{6A9DD143-FE65-4B1D-B6CF-CD42F1B50234}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online Stamparija", "Online Stamparija\Online Stamparija.csproj", "{522E2FCD-4747-44F6-A745-FF77AAA95956}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6A9DD143-FE65-4B1D-B6CF-CD42F1B50234} = {6A9DD143-FE65-4B1D-B6CF-CD42F1B50234}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
