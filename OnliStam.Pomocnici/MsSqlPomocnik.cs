@@ -58,7 +58,7 @@ namespace OnliStam.Pomocnici
         /// <param name="NazivProcedure"></param>
         /// <param name="parametri"></param>   
         /// <returns></returns>
-        public DataTable IzvrsiProceduru(string NazivProcedure, Dictionary<string, object> parametri)
+        public DataTable IzvrsiProceduru(SqlUpit NazivProcedure, Dictionary<string, object> parametri)
         {
             using(SqlConnection conn = new SqlConnection(CONNECTION_STRING))
             {
@@ -100,7 +100,7 @@ namespace OnliStam.Pomocnici
         /// <param name="imeProcedure"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public DataTable IzvrsiProceduru<T>(string imeProcedure, T model)
+        public DataTable IzvrsiProceduru<T>(SqlUpit imeProcedure, T model)
         {
             var properties = model.GetType().GetProperties();
             Dictionary<string, object> parametri = new Dictionary<string, object>();
@@ -120,7 +120,7 @@ namespace OnliStam.Pomocnici
         /// <param name="imeProcedure"></param>
         /// <param name="parametri"></param>
         /// <returns></returns>
-        public T IzvrsiProceduru<T>(string imeProcedure, Dictionary<string, object> parametri) where T: new()
+        public T IzvrsiProceduru<T>(SqlUpit imeProcedure, Dictionary<string, object> parametri) where T: new()
         {
             T odgovor = new T();
             var tabela = IzvrsiProceduru(imeProcedure, parametri);
@@ -173,7 +173,7 @@ namespace OnliStam.Pomocnici
         /// <param name="imeProcedure"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        public List<T2> IzvrsiProceduru<T1, T2>(string imeProcedure, T1 model) where T2: new()
+        public List<T2> IzvrsiProceduru<T1, T2>(SqlUpit imeProcedure, T1 model) where T2: new()
         {
             //var properties = model.GetType().GetProperties();
             List<T2> odgovor = new List<T2>();
@@ -236,7 +236,7 @@ namespace OnliStam.Pomocnici
             }
         }
 
-        public DataSet IzvrsiStoredProceduru(string imeProcedure, Dictionary<string, object> parametri)
+        public DataSet IzvrsiStoredProceduru(SqlUpit imeProcedure, Dictionary<string, object> parametri)
         {
             using(System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(CONNECTION_STRING))
             {

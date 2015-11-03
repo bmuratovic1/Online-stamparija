@@ -13,7 +13,7 @@ namespace OnliStam.Pomocnici
         /// <param name="NazivProcedure"></param>
         /// <param name="parametri"></param>
         /// <returns></returns>
-        System.Data.DataTable IzvrsiProceduru(string NazivProcedure, System.Collections.Generic.Dictionary<string, object> parametri);
+        System.Data.DataTable IzvrsiProceduru(OnliStam.Pomocnici.SqlUpit NazivProcedure, System.Collections.Generic.Dictionary<string, object> parametri);
 
         /// <summary>
         /// 
@@ -22,7 +22,7 @@ namespace OnliStam.Pomocnici
         /// <param name="imeProcedure"></param>
         /// <param name="parametri"></param>
         /// <returns></returns>
-        T IzvrsiProceduru<T>(string imeProcedure, System.Collections.Generic.Dictionary<string, object> parametri) where T: new();
+        T IzvrsiProceduru<T>(SqlUpit imeProcedure, System.Collections.Generic.Dictionary<string, object> parametri) where T: new();
 
         /// <summary>
         /// 
@@ -31,7 +31,7 @@ namespace OnliStam.Pomocnici
         /// <param name="imeProcedure"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        System.Data.DataTable IzvrsiProceduru<T>(string imeProcedure, T model);
+        System.Data.DataTable IzvrsiProceduru<T>(SqlUpit imeProcedure, T model);
 
         /// <summary>
         /// 
@@ -41,7 +41,7 @@ namespace OnliStam.Pomocnici
         /// <param name="imeProcedure"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        System.Collections.Generic.List<T2> IzvrsiProceduru<T1, T2>(string imeProcedure, T1 model) where T2: new();
+        System.Collections.Generic.List<T2> IzvrsiProceduru<T1, T2>(SqlUpit imeProcedure, T1 model) where T2: new();
 
         /// <summary>
         /// 
@@ -49,6 +49,6 @@ namespace OnliStam.Pomocnici
         /// <param name="imeProcedure"></param>
         /// <param name="parametri"></param>
         /// <returns></returns>
-        System.Data.DataSet IzvrsiStoredProceduru(string imeProcedure, System.Collections.Generic.Dictionary<string, object> parametri);
+        System.Data.DataSet IzvrsiStoredProceduru(SqlUpit imeProcedure, System.Collections.Generic.Dictionary<string, object> parametri);
     }
 }

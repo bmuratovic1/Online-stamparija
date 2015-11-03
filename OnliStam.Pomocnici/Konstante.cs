@@ -6,57 +6,98 @@ using System.Threading.Tasks;
 
 namespace OnliStam.Pomocnici
 {
-    public class Konstante
+    public struct Konstante
     {
-        public static readonly string DAJ_KORISNIKA_ID = "DajKorisnika_ID";
-        public static readonly string DAJ_KORISNIKA_EMAIL = "DajKorisnika_Email";
-        public static readonly string DAJ_KORISNIKA_UNAME_PASS = "DajKorisnika";
-        public static readonly string REGISTRUJ_KORISNIKA = "RegistrujKorisnika";
-        public static readonly string DAJ_POSAO_ID = "DajPosao_ID";
-        public static readonly string DODAJ_POSAO = "UnesiPosao";
-        public static readonly string DAJ_ZAVRSENE_POSLOVE = "DajZavrsenePoslove";
-        public static readonly string DAJ_NEZAVRSENE_POSLOVE = "DajNezavrsenePoslove";
-        public static readonly string DODAJ_DTP = "DodajDTP";
-        public static readonly string POTVRDI_REGISTRACIJU = "PotvrdiRegistraciju";
-        public static readonly string PROMJENA_LOZINKE = "PromjeniLozinku";
-        public static readonly string DAJ_LOGOVE = "DajLogove";
-        public static readonly string DAJ_LOGOVE_TIP = "DajLogove_Tip";
-        public static readonly string DAJ_LOG_ZADNjI_MINUTE = "DajLogZadnjiMinute";
-        public static readonly string DODAJ_LOG = "DodajLog";
-        public static readonly string ZAHTJEV_NOVA_LOZINKA = "ZahtjevNovaLozinka";
-        public static readonly string PROMJENI_LOZINKU = "PromijeniLozinku";
-        public static readonly string DODAJ_REPROMATERIJAL = "DodajRepromaterijal";
-        public static readonly string DODAJ_VANJSKU_USLUGU = "DodajVanjskuUslugu";
-        public static readonly string DODAJ_STAMPU = "DodajStampu";
-        public static readonly string DODAJ_RUCNI_RAD = "DodajRucniRad";
-        public static readonly string DODAJ_MONTAZU = "DodajMontazu";
-        public static readonly string DODAJ_KNJIGOVODSTVENU_DORADU = "DodajKnjigovodstvenuDoradu";
-        public static readonly string DAJ_PUTANjU_SLIKE = "DajSliku";
-        public static readonly string DODAJ_SLIKU = "DodajSliku";
-        public static readonly string DAJ_SVE_KORISNIKE = "DajSveKorisnike";
-        public static readonly string BANUJ_KORISNIKA = "BanujKorisnika";
-        public static readonly string ODBANUJ_KORISNIKA = "OdbanujKorisnika";
-        public static readonly string UNAPRIJEDI_KORISNIKA = "UnaprijediKorisnika";
-        public static readonly string NAZADUJ_KORISNIKA = "UnazadiKorisnika";
-        public static readonly string DAJ_DTP = "DajDtp";
-        public static readonly string DAJ_MONAZU = "DajMontazu";
-        public static readonly string DAJ_STAMPU = "DajStampu";
-        public static readonly string POTVRDI_POSAO = "PotvrdiPosao";
-        public static readonly string DAJ_PODATKE_ZA_GRAF = "DajPodatkeZaGraf_1";
+        public class StoredProcedures
+        {
+            public static readonly SqlUpit DAJ_KORISNIKA_ID = new SqlUpit("DajKorisnika_ID", "", new List<string> { "@korisnikId" });
+            public static readonly SqlUpit DAJ_KORISNIKA_EMAIL = "DajKorisnika_Email";
+            [Parametri("Username")]
+            public static readonly SqlUpit DAJ_KORISNIKA_UNAME_PASS = new SqlUpit("DajKorisnika",
+                @"SELECT * 
+	FROM tblUsers
+	WHERE
+		Username = @Username
+		AND Password = @Password",
+                                 new List<string> { "Username", "Password" });
+            public static readonly SqlUpit REGISTRUJ_KORISNIKA = "RegistrujKorisnika";
+            public static readonly SqlUpit DAJ_POSAO_ID = "DajPosao_ID";
+            public static readonly SqlUpit DODAJ_POSAO = "UnesiPosao";
+            public static readonly SqlUpit DAJ_ZAVRSENE_POSLOVE = "DajZavrsenePoslove";
+            public static readonly SqlUpit DAJ_NEZAVRSENE_POSLOVE = "DajNezavrsenePoslove";
+            public static readonly SqlUpit DODAJ_DTP = "DodajDTP";
+            public static readonly SqlUpit POTVRDI_REGISTRACIJU = "PotvrdiRegistraciju";
+            public static readonly SqlUpit PROMJENA_LOZINKE = "PromjeniLozinku";
+            public static readonly SqlUpit DAJ_LOGOVE = new SqlUpit("DajLogove", "SELECT * FROM Logovi ORDER BY Datum DESC", new List<string>());
+            [Parametri("Tip")]
+            public static readonly SqlUpit DAJ_LOGOVE_TIP =
+                new SqlUpit("DajLogove_Tip", 
+@"SELECT * FROM Logovi
+WHERE @Tip = @tip
+ORDER BY Datum DESC", 
+new List<string>{"Tip"});
+            
+            public static readonly SqlUpit DAJ_LOG_ZADNjI_MINUTE = new SqlUpit("DajLogZadnjiMinute",
+@"SELECT * FROM Logovi
+WHERE date_add(Datum, INTERVAL @minute MINUTE) <= < NOW()
+ORDER BY Datum DESC",
+new List<string>{"Minute"});
+            [Parametri("Sadrzaj", "Tip", "Datum")]
+            public static readonly SqlUpit DODAJ_LOG = new SqlUpit("DodajLog",
+@"INSERT INTO Logovi(
+	Sadrzaj,
+	Tip,
+	Datum
+)
+VALUES(
+	@Sadrzaj,
+	@Tip,
+	@Datum
+)",
+                new List<string> {
+                    "Sadrzaj",
+                    "Tip",
+                    "Datum"
+                });
+            
+            public static readonly SqlUpit ZAHTJEV_NOVA_LOZINKA = "ZahtjevNovaLozinka";
+            public static readonly SqlUpit PROMJENI_LOZINKU = "PromijeniLozinku";
+            public static readonly SqlUpit DODAJ_REPROMATERIJAL = "DodajRepromaterijal";
+            public static readonly SqlUpit DODAJ_VANJSKU_USLUGU = "DodajVanjskuUslugu";
+            public static readonly SqlUpit DODAJ_STAMPU = "DodajStampu";
+            public static readonly SqlUpit DODAJ_RUCNI_RAD = "DodajRucniRad";
+            public static readonly SqlUpit DODAJ_MONTAZU = "DodajMontazu";
+            public static readonly SqlUpit DODAJ_KNJIGOVODSTVENU_DORADU = "DodajKnjigovodstvenuDoradu";
+            public static readonly SqlUpit DAJ_PUTANjU_SLIKE = "DajSliku";
+            public static readonly SqlUpit DODAJ_SLIKU = "DodajSliku";
+            public static readonly SqlUpit DAJ_SVE_KORISNIKE = "DajSveKorisnike";
+            public static readonly SqlUpit BANUJ_KORISNIKA = "BanujKorisnika";
+            public static readonly SqlUpit ODBANUJ_KORISNIKA = "OdbanujKorisnika";
+            public static readonly SqlUpit UNAPRIJEDI_KORISNIKA = "UnaprijediKorisnika";
+            public static readonly SqlUpit NAZADUJ_KORISNIKA = "UnazadiKorisnika";
+            public static readonly SqlUpit DAJ_DTP = "DajDtp";
+            public static readonly SqlUpit DAJ_MONAZU = "DajMontazu";
+            public static readonly SqlUpit DAJ_STAMPU = "DajStampu";
+            public static readonly SqlUpit POTVRDI_POSAO = "PotvrdiPosao";
+            public static readonly SqlUpit DAJ_PODATKE_ZA_GRAF = "DajPodatkeZaGraf_1";
+        }
 
-        public static readonly string REGISTRACIJA_TEMPLATE = @"
+        public struct EMailTemplates
+        {
+            public const string REGISTRACIJA_TEMPLATE = @"
 Dobro došli na našu stranicu i čestitamo na uspješnoj registraciji.
 Da biste potvrdili registraciju, kliknite na link ispod:
 http://www.nwt.somee.com/api/Account/PotvrdaRegistracijeJson/{0}?guid={1}
 
 Ako niste Vi zahtjevali registaciju na našoj stranici, molimo Vas da ovu poruku zanemarite.
 ";
-        public static readonly string PROMJENA_LOZINKE_TEMPLATE = @"
+            public const string PROMJENA_LOZINKE_TEMPLATE = @"
 Poštovani,
 Da biste promijenili vašu lozinku, potrebno je da kliknete na link ispod:
 
 http://www.nwt.somee.com/Home/PromjenaLozinke/{0}?guid={1}
 
 Ako niste Vi zahtjevali promjenu lozinke, molimo Vas da ovu poruku zanemarite.";
+        }
     }
 }
