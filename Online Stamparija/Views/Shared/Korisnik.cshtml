@@ -1,0 +1,51 @@
+﻿@model Online_Stamparija.Models.Korisnik
+
+<style type="text/css">
+    .sirokaKolona {
+        margin: 3px 0px 0px 3px;
+        padding: 3px;
+    }
+
+    .okvir {
+        width: 350px;
+        border: 3px solid black;
+        margin: 25px;
+        padding: 15px;
+        display: inline-block;
+        clear: both;
+    }
+</style>
+
+<div class="okvir">
+
+    <h4>
+        @Html.DisplayFor(model => model.UserName)
+    </h4>
+    <hr />
+
+    <table>
+        <tr>
+            <td class="sirokaKolona">
+                <a href="mailto:@Html.DisplayFor(model => model.Email)">
+                    <img src="/Images/at.png" alt="at" />
+                    <span>Pošalji poruku</span>
+                </a>
+            </td>
+            <td class="sirokaKolona">|</td>
+            <td>
+
+                <a href="@Url.Action("Edit", new { id = Model.ID })">
+                    <img src="/Images/olovka.png" alt="at" />
+                    <span>Uredi</span>
+                </a>
+            </td>
+            <td class="sirokaKolona">|</td>
+            <td>
+                <a href="@Url.Action("Delete", new { id = Model.ID })">
+                    <img src="/Images/brisi.png" alt="at" />
+                    <span>Obriši</span>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

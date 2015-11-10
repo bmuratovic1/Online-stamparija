@@ -9,6 +9,13 @@
     <h1>Online Štamparija</h1>
 </div>
 
+@if(ViewBag.Error != null || TempData["Error"]!=null)
+{
+    <div class="alert alert-danger" style="float:left">
+        <span>@ViewBag.Error + @TempData["Error"]</span>
+    </div>
+}
+
 <div class="row" style="margin:25px">
     <div>Ovo je neki iscrpan opis o Online Štampariji čija je ovo web stranica.
     <br />Ovdje piše:<ul><li>čime se bave</li><li>šta rade</li><li>da su najbolji u mahali a i šire</li></ul> i tako dalje</div>

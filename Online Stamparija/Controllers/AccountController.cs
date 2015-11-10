@@ -23,7 +23,14 @@ namespace Online_Stamparija.Controllers
         // GET: Account/Details/5
         public ActionResult Login(Models.Korisnik model)
         {
-            Models.LogovaniKorisnik.Instanca.Login(model.UserName, model.Password);
+            try
+            {
+                Models.LogovaniKorisnik.Instanca.Login(model.UserName, model.Password);
+            }
+            catch(Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
             return RedirectToAction("Index", "Home");
         }
 

@@ -39,6 +39,10 @@ namespace Online_Stamparija.Models
         /// </summary>
         public string Email { get; set; }
 
+        public string Password { get; set; }
+
+        public string Pozicija { get; set; }
+
         public static LogovaniKorisnik Instanca
         {
             get
@@ -77,23 +81,33 @@ namespace Online_Stamparija.Models
             //zapisnik.Zapisi("Pokušaj logina sa username = " + userName + " i lozinka = " + password, 1);
 
             //var dbResponse = db.IzvrsiProceduru(Konstante.StoredProcedures.DAJ_KORISNIKA_UNAME_PASS.SaParametrima{UserName= userName, Password = password }, new Korisnik());
-            var dbResponse = db.IzvrsiProceduru(Konstante.StoredProcedures.DAJ_KORISNIKA_UNAME_PASS, new Korisnik { UserName = userName, Password = password });
-            if(dbResponse != null && dbResponse.Rows.Count == 1 && dbResponse.Rows[0]["Password"].ToString() == password)
+            var korisnik = db.IzvrsiProceduru<Korisnik>(Konstante.StoredProcedures.DAJ_KORISNIKA_UNAME_PASS, new Dictionary<string, object> { { "UserName", userName } });
+            if(korisnik != null && !string.IsNullOrEmpty(korisnik.UserName))
             {
-                UserName = userName;
-                Email = dbResponse.Rows[0]["Email"].ToString();
+                if(KriptoPomocnik.VerifyMd5Hash(password, korisnik.Password))
+                {
+                    UserName = userName;
+                    Email = korisnik.Email;
+                    Pozicija = korisnik.Pozicija;
+                }
+                else
+                {
+                    throw new ArgumentException("Pogresna sifra!");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Pogresni podaci!");
             }
 
         }
-
-        #endregion
-
-        public string Password { get; set; }
 
         internal void LogOut()
         {
             UserName = null;
             Email = null;
         }
+
+        #endregion
     }
 }

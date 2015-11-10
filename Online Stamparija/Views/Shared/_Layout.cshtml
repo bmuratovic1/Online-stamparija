@@ -32,35 +32,22 @@
                         </ul>
                     </div>
                 </td>
-                @**@
-                <td style="align-self:flex-end">
-                    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName == null)
-                    {
-                        @Html.Partial("Login", new Online_Stamparija.Models.Korisnik());
-                    }
-                    else
-                    {<div class="navbar navbar-inverse navbar-fixed-top">
-                        <div class="container">
-                            <div class="navbar-header">
-                                <label>Dobro dosao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</label>
-                                @Html.ActionLink("Logout", "Logout", "Account");
+                <td>
+                    <div>
+                        @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName == null)
+                        {
+                            @Html.Partial("Login", new Online_Stamparija.Models.Korisnik());
+                        }
+                        else
+                        {
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li style="color:white"><h3>Dobro dosao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3></li>
+                                    <li>@Html.ActionLink("Logout", "Logout", "Account");</li>
+                                </ul>
                             </div>
-                        </div>
+                        }
                     </div>
-                    }
-                    @*<table>
-                            <tr>
-                                <td>username:</td>
-                                <td>password:</td>
-                                <td />
-                            </tr>
-                            <tr>
-                                <td>@Html.TextBox("UserName")</td>
-                                <td>@Html.Password("Password")</td>
-                                <td>@Html.ActionLink("Login", "Login", "Account")</td>
-                            </tr>
-                        </table>
-                        }*@
                 </td>
             </tr>
         </table>

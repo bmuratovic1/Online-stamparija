@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Online_Stamparija.Models.Korisnik>
+
+@{
+    ViewBag.Title = "Administrativna ploca";
+}
+
+<h2>Administrativna ploča</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div>
+    @foreach(var item in Model)
+    {
+        @Html.Partial("Korisnik", item);
+    }
+</div>

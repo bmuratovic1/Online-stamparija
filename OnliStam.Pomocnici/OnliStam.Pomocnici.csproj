@@ -58,7 +58,7 @@
     <Compile Include="Log.cs" />
     <Compile Include="MsSqlPomocnik.cs" />
     <Compile Include="MySqlPomocnik.cs" />
-    <Compile Include="Parametri.cs" />
+    <Compile Include="Privilegija.cs" />
     <Compile Include="SqlProcedure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Zapisnik.cs" />

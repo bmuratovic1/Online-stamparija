@@ -11,25 +11,35 @@ namespace OnliStam.Pomocnici
         public class StoredProcedures
         {
             public static readonly SqlUpit DAJ_KORISNIKA_ID = new SqlUpit("DajKorisnika_ID", "", new List<string> { "@korisnikId" });
+            
             public static readonly SqlUpit DAJ_KORISNIKA_EMAIL = "DajKorisnika_Email";
-            [Parametri("Username")]
+            
             public static readonly SqlUpit DAJ_KORISNIKA_UNAME_PASS = new SqlUpit("DajKorisnika",
                 @"SELECT * 
-	FROM tblUsers
+	FROM korisnici
 	WHERE
 		Username = @Username
-		AND Password = @Password",
-                                 new List<string> { "Username", "Password" });
+        AND Aktivan=1",
+                                 new List<string> { "Username"});
+            
             public static readonly SqlUpit REGISTRUJ_KORISNIKA = "RegistrujKorisnika";
+            
             public static readonly SqlUpit DAJ_POSAO_ID = "DajPosao_ID";
+            
             public static readonly SqlUpit DODAJ_POSAO = "UnesiPosao";
+            
             public static readonly SqlUpit DAJ_ZAVRSENE_POSLOVE = "DajZavrsenePoslove";
+            
             public static readonly SqlUpit DAJ_NEZAVRSENE_POSLOVE = "DajNezavrsenePoslove";
+            
             public static readonly SqlUpit DODAJ_DTP = "DodajDTP";
+            
             public static readonly SqlUpit POTVRDI_REGISTRACIJU = "PotvrdiRegistraciju";
+            
             public static readonly SqlUpit PROMJENA_LOZINKE = "PromjeniLozinku";
+            
             public static readonly SqlUpit DAJ_LOGOVE = new SqlUpit("DajLogove", "SELECT * FROM Logovi ORDER BY Datum DESC", new List<string>());
-            [Parametri("Tip")]
+            
             public static readonly SqlUpit DAJ_LOGOVE_TIP =
                 new SqlUpit("DajLogove_Tip", 
 @"SELECT * FROM Logovi
@@ -42,7 +52,7 @@ new List<string>{"Tip"});
 WHERE date_add(Datum, INTERVAL @minute MINUTE) <= < NOW()
 ORDER BY Datum DESC",
 new List<string>{"Minute"});
-            [Parametri("Sadrzaj", "Tip", "Datum")]
+
             public static readonly SqlUpit DODAJ_LOG = new SqlUpit("DodajLog",
 @"INSERT INTO Logovi(
 	Sadrzaj,
@@ -70,7 +80,9 @@ VALUES(
             public static readonly SqlUpit DODAJ_KNJIGOVODSTVENU_DORADU = "DodajKnjigovodstvenuDoradu";
             public static readonly SqlUpit DAJ_PUTANjU_SLIKE = "DajSliku";
             public static readonly SqlUpit DODAJ_SLIKU = "DodajSliku";
-            public static readonly SqlUpit DAJ_SVE_KORISNIKE = "DajSveKorisnike";
+            public static readonly SqlUpit DAJ_SVE_KORISNIKE = new SqlUpit("DajSveKorisnike",
+                "SELECT * FROM Korisnici",
+                new List<string> { });
             public static readonly SqlUpit BANUJ_KORISNIKA = "BanujKorisnika";
             public static readonly SqlUpit ODBANUJ_KORISNIKA = "OdbanujKorisnika";
             public static readonly SqlUpit UNAPRIJEDI_KORISNIKA = "UnaprijediKorisnika";
