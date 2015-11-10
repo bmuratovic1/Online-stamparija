@@ -81,7 +81,7 @@ VALUES(
             public static readonly SqlUpit DAJ_PUTANjU_SLIKE = "DajSliku";
             public static readonly SqlUpit DODAJ_SLIKU = "DodajSliku";
             public static readonly SqlUpit DAJ_SVE_KORISNIKE = new SqlUpit("DajSveKorisnike",
-                "SELECT * FROM Korisnici",
+                "SELECT * FROM korisnici",
                 new List<string> { });
             public static readonly SqlUpit BANUJ_KORISNIKA = "BanujKorisnika";
             public static readonly SqlUpit ODBANUJ_KORISNIKA = "OdbanujKorisnika";
