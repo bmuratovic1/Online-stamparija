@@ -37,11 +37,20 @@ namespace Online_Stamparija.Models
         /// <summary>
         /// Email prijavljenog korisnika
         /// </summary>
-        public string Email { get; set; }
+        public string Email {
+            get; // { return _instanca.Email; }
+            set; // { _instanca.Email = value; }
+        }
 
-        public string Password { get; set; }
+        public string Password {
+            get; // { return _instanca.Password; }
+            set; // { _instanca.Password = value; }
+        }
 
-        public string Pozicija { get; set; }
+        public int Pozicija {
+            get; // { return _instanca.Pozicija; }
+            set; // { _instanca.Pozicija = value; }
+        }
 
         public static LogovaniKorisnik Instanca
         {
@@ -49,10 +58,31 @@ namespace Online_Stamparija.Models
             {
                 lock(_brava)
                 {
+                    var TRAJANjE_SESIJE = 1;
+                    HttpContext.Current.Session.Timeout = TRAJANjE_SESIJE;
+
                     if(HttpContext.Current.Session["sesija"] == null)
-                        HttpContext.Current.Session.Add("sesija", new Models.LogovaniKorisnik());
-                    return HttpContext.Current.Session["sesija"] as LogovaniKorisnik;
+                    {
+                        _instanca = new Models.LogovaniKorisnik();
+                        HttpContext.Current.Session.Add("sesija", _instanca);
+                    }
+
+                    if(HttpContext.Current.Session["loginPokusaji"] == null)
+                        HttpContext.Current.Session.Add("loginPokusaji", 0);
+                    return _instanca;
                 }
+            }
+        }
+
+        private int LoginPokusaji
+        {
+            get
+            {
+                return (int)(HttpContext.Current.Session["loginPokusaji"]);
+            }
+            set
+            {
+                HttpContext.Current.Session.Add("loginPokusaji", value);
             }
         }
 
@@ -76,6 +106,11 @@ namespace Online_Stamparija.Models
         /// <param name="password">Lozinka</param>
         internal void Login(string userName, string password)
         {
+            int MAKS_LOGIN_POKUSAJ = 5; // iy config
+            if(LoginPokusaji > MAKS_LOGIN_POKUSAJ)
+            {
+                throw new UnauthorizedAccessException("Nemoj džaba!");
+            }
             OnliStam.Pomocnici.IDbPomocnik db = new OnliStam.Pomocnici.MySqlPomocnik();
             Zapisnik zapisnik = new Zapisnik(db);
             //zapisnik.Zapisi("Pokušaj logina sa username = " + userName + " i lozinka = " + password, 1);
@@ -92,11 +127,13 @@ namespace Online_Stamparija.Models
                 }
                 else
                 {
+                    LoginPokusaji++;
                     throw new ArgumentException("Pogresna sifra!");
                 }
             }
             else
             {
+                LoginPokusaji++;
                 throw new ArgumentException("Pogresni podaci!");
             }
 
@@ -104,10 +141,17 @@ namespace Online_Stamparija.Models
 
         internal void LogOut()
         {
-            UserName = null;
-            Email = null;
+            _instanca = new LogovaniKorisnik();
         }
 
         #endregion
+
+        public bool Logovan
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(UserName);
+            }
+        }
     }
 }

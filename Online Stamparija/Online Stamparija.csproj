@@ -138,6 +138,7 @@
     </Compile>
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\LogovaniKorisnik.cs" />
+    <Compile Include="Models\PozicijaEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +187,7 @@
     </Content>
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Shared\Korisnik.cshtml" />
+    <Content Include="Views\Users\Novi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -15,7 +15,7 @@ namespace Online_Stamparija.Models
 
         public string  Email { get; set; }
 
-        public string Pozicija { get; set; }
+        public int Pozicija { get; set; }
 
         public string Ime { get; set; }
 

@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Online_Stamparija.Models;
+using OnliStam.Pomocnici;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Online_Stamparija.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController: Controller
     {
         // GET: Account
         public ActionResult Index()
@@ -40,21 +43,18 @@ namespace Online_Stamparija.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // GET: Account/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Account/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        //public ActionResult Create(FormCollection collection)
+        public ActionResult Create([System.Web.Http.FromBody]Korisnik model)
         {
             try
             {
-                // TODO: Add insert logic here
+                var dbPomocnik = new MySqlPomocnik();
+                model.Password = KriptoPomocnik.GetMd5Hash(model.Password);
+                dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.REGISTRUJ_KORISNIKA, model);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Users");
             }
             catch
             {

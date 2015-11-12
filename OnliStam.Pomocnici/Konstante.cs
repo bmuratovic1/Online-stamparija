@@ -21,8 +21,24 @@ namespace OnliStam.Pomocnici
 		Username = @Username
         AND Aktivan=1",
                                  new List<string> { "Username"});
-            
-            public static readonly SqlUpit REGISTRUJ_KORISNIKA = "RegistrujKorisnika";
+
+            public static readonly SqlUpit REGISTRUJ_KORISNIKA = new SqlUpit("RegistrujKorisnika",
+                @"INSERT INTO korisnici(
+                    Username,
+                    Password,
+                    Email,
+                    Pozicija,
+                    Ime,
+                    Prezime
+                )VALUES(
+                    @Username,
+                    @Password,
+                    @Email,
+                    @Pozicija,
+                    @Ime,
+                    @Prezime
+                )",
+                new List<string> { "Username", "Password", "Email", "Pozicija", "Ime", "Prezime" });
             
             public static readonly SqlUpit DAJ_POSAO_ID = "DajPosao_ID";
             
@@ -81,9 +97,14 @@ VALUES(
             public static readonly SqlUpit DAJ_PUTANjU_SLIKE = "DajSliku";
             public static readonly SqlUpit DODAJ_SLIKU = "DodajSliku";
             public static readonly SqlUpit DAJ_SVE_KORISNIKE = new SqlUpit("DajSveKorisnike",
-                "SELECT * FROM korisnici",
+                "SELECT * FROM korisnici WHERE Aktivan = 1",
                 new List<string> { });
-            public static readonly SqlUpit BANUJ_KORISNIKA = "BanujKorisnika";
+            public static readonly SqlUpit BANUJ_KORISNIKA = new SqlUpit("BanujKorisnika",
+                @"UPDATE korisnici
+                SET Aktivan = 0
+                WHERE ID = @ID",
+                    new List<string> { "ID" }
+                    );
             public static readonly SqlUpit ODBANUJ_KORISNIKA = "OdbanujKorisnika";
             public static readonly SqlUpit UNAPRIJEDI_KORISNIKA = "UnaprijediKorisnika";
             public static readonly SqlUpit NAZADUJ_KORISNIKA = "UnazadiKorisnika";
