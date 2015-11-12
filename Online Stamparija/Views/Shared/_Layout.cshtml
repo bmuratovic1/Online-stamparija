@@ -29,6 +29,10 @@
                             <li>@Html.ActionLink("Početna", "Index", "Home")</li>
                             <li>@Html.ActionLink("O nama", "About", "Home")</li>
                             <li>@Html.ActionLink("Kontakti", "Contact", "Home")</li>
+                            @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1)
+                            {
+                                <li>@Html.ActionLink("Administrativna ploča", "Index", "Users")</li>
+                            }
                         </ul>
                     </div>
                 </td>
