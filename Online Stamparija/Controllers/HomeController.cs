@@ -26,5 +26,10 @@ namespace Online_Stamparija.Controllers
 
             return View();
         }
+        public ActionResult ForgotPass()
+        {
+            ViewBag.Message = "Enter your e-mail address:";
+            return View();
+        }
     }
 }

@@ -25,8 +25,7 @@
                 <div class="form-group">
                     <div class="col-md-10">
                         @*@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })*@
-                        <input type="text" name="UserName" /><br />
-                        @Html.ValidationMessageFor(model => model.UserName, "Korisničko ime mora biti obezbjeđeno.", new { @class = "text-danger" })>
+                        <input type="text" name="UserName" />
                     </div>
                 </div>
             </td>
@@ -34,10 +33,10 @@
                 <div class="form-group">
                     <div class="col-md-10">
                         @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })<br />
-                        @Html.ValidationMessageFor(model => model.Password, "Lozinka mora biti unesena!", new { @class = "text-danger" })
+                        @Html.ActionLink("Zaboravili ste sifru?","ForgotPass","Home");
                     </div>
                 </div>
-            </td>
+            </td> 
             <td>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
