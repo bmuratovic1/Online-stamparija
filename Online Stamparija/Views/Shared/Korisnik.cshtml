@@ -1,52 +1,64 @@
 ﻿@model Online_Stamparija.Models.Korisnik
 
 <style type="text/css">
-    .sirokaKolona {
-        margin: 3px 0px 0px 3px;
-        padding: 3px;
-    }
-
-    .okvir {
-        width: 350px;
-        border: 3px solid black;
-        margin: 25px;
-        padding: 15px;
-        display: inline-block;
-        clear: both;
-    }
 </style>
 
-<div class="okvir">
+<div class="okvir header">
 
-    <h4>
+    <h4 class="header">
         @Html.DisplayFor(model => model.Ime)&nbsp;
         @Html.DisplayFor(model => model.Prezime)
     </h4>
+    @*<span class="floatRight">*@
+    @switch(Model.Pozicija)
+    {
+        case (int)Online_Stamparija.Models.PozicijaEnum.Administrator:
+            <img src="~/Images/appbar.scrabble.a.png" class="floatRight" />
+            break;
+        case (int)Online_Stamparija.Models.PozicijaEnum.Menadzer:
+        <img src="~/Images/appbar.scrabble.m.png" class="floatRight" />
+            break;
+        case (int)Online_Stamparija.Models.PozicijaEnum.Radnik:
+        <img src="~/Images/appbar.scrabble.r.png" class="floatRight" />
+            break;
+    }
+    @*</span>*@
+
     <hr />
 
-    <table>
-        <tr>
-            <td class="sirokaKolona">
-                <a href="mailto:@Html.DisplayFor(model => model.Email)">
-                    <img src="/Images/at.png" alt="at" />
-                    <span>Pošalji poruku</span>
-                </a>
-            </td>
-            <td class="sirokaKolona">|</td>
-            <td>
-
-                <a href="@Url.Action("Edit", new { id = Model.ID })">
-                    <img src="/Images/olovka.png" alt="at" />
-                    <span>Uredi</span>
-                </a>
-            </td>
-            <td class="sirokaKolona">|</td>
-            <td>
-                <a href="@Url.Action("Delete", new { id = Model.ID })">
-                    <img src="/Images/brisi.png" alt="at" />
-                    <span>Obriši</span>
-                </a>
-            </td>
-        </tr>
-    </table>
+    @if(Model.Pozicija != (int)Online_Stamparija.Models.PozicijaEnum.Administrator)
+    {
+        <table class="footer floatRight">
+            <tr>
+                <td class="sirokaKolona">
+                    <a href="mailto:@Html.DisplayFor(model => model.Email)">
+                        <img src="/Images/at.png" alt="at" class="iconButton" />
+                        <span>Pošalji poruku</span>
+                    </a>
+                </td>
+                <td class="sirokaKolona">
+                    <a href="@Url.Action("Edit", new { id = Model.ID })">
+                        <img src="/Images/olovka.png" alt="olovka" class="iconButton" />
+                        <span>Uredi</span>
+                    </a>
+                </td>
+                <td class="sirokaKolona">
+                    @if(Model.Aktivan == 1)
+                    {
+                        <a href="@Url.Action("Ban", new { id = Model.ID })">
+                            <img src="~/Images/appbar.os.android.png" alt="at" class="iconButton" />
+                            <span>Banuj</span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Unban", new { id = Model.ID })">
+                            <img src="~/Images/appbar.os.windows.8.png" alt="at" class="iconButton" />
+                            <span>Vrati</span>
+                        </a>
+                    }
+                </td>
+            </tr>
+        </table>
+    }
 </div>

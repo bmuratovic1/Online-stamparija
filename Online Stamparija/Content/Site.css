@@ -22,3 +22,212 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+.iconButton {
+    border-radius: 25px;
+    background-image: url("../Images/basecircle.png");
+    background-size: contain;
+    width: 50px;
+    margin-left: 13px;
+    margin-right: 13px;
+}
+
+    .iconButton:hover {
+        background-color: rgba(39, 36, 36, 0.3);
+    }
+
+.iconButtonBijeli {
+    border-radius: 25px;
+    background-image: url("../Images/basecircle.B.png");
+    background-size: contain;
+    width: 50px;
+    margin-left: 13px;
+    margin-right: 13px;
+}
+
+    .iconButtonBijeli:hover {
+        background-color: rgba(39, 36, 36, 0.3);
+    }
+
+    .iconButtonBijeli.mali {
+        width: 33px;
+    }
+
+.metroButton {
+    /*width: 100%;*/
+    max-height: 81px;
+    margin: 0;
+    text-align: center;
+}
+
+    .metroButton a {
+        text-decoration: none;
+        color: #838383;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .metroButton:hover img {
+        background-color: rgba(39, 36, 36, 0.3);
+    }
+
+    .metroButton:hover span {
+        background-color: rgba(39, 36, 36, 0.3) !important;
+        text-decoration: none;
+        color: #FFF;
+    }
+
+.desniBar {
+    background-color: #222222;
+    width: 91px;
+    right: 0px;
+    position: fixed;
+    height: 100%;
+    padding-top: 55px;
+    vertical-align: middle;
+}
+
+.desniBarSiroki {
+    background-color: #222222;
+    width: 320px;
+    right: 0px;
+    position: fixed;
+    height: 100%;
+    padding-top: 55px;
+    vertical-align: middle;
+    margin: 0;
+    padding-left: 0;
+}
+
+    .desniBarSiroki ul {
+        padding-left: 10px;
+    }
+
+    .desniBarSiroki label {
+        color: #838383;
+        margin-left: 0;
+        margin-top: 15px;
+        padding: 0;
+    }
+
+    .desniBarSiroki h4 {
+        color: #999999;
+        margin-left: 0;
+        margin-top: 15px;
+        padding: 0;
+    }
+
+    .desniBarSiroki select {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .desniBarSiroki input {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+
+        .desniBarSiroki input[type=submit] {
+            width: 100%;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            background-color: transparent;
+            color: #838383;
+            border-radius: 0;
+        }
+
+            .desniBarSiroki input[type=submit]:hover {
+                background-color: rgba(39, 36, 36, 0.3);
+            }
+
+        .desniBarSiroki input[type="checkbox"] {
+            display: none;
+            float: right;
+        }
+
+            .desniBarSiroki input[type="checkbox"] + label span {
+                display: inline-block;
+                width: 50px;
+                height: 19px;
+                margin: -1px 4px 0 0;
+                vertical-align: middle;
+                background: url(../Images/switch.off.B.png) left top no-repeat;
+                cursor: pointer;
+            }
+
+            .desniBarSiroki input[type="checkbox"] + label {
+                display: inline-block;
+                float: right;
+            }
+
+            .desniBarSiroki input[type="checkbox"]:checked + label span {
+                background: url(../Images/switch.on.B.png) top no-repeat;
+                width: 50px;
+                height: 19px;
+            }
+
+    .desniBarSiroki a {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        padding-top: 25px;
+        padding-bottom: 15px;
+    }
+
+    .desniBarSiroki ul {
+        list-style-type: none;
+    }
+
+.sirokaKolona {
+    margin: 3px 0px 0px 3px;
+    padding: 3px;
+    text-align: center;
+    width: 81px;
+}
+
+    .sirokaKolona td {
+        text-align: center;
+    }
+
+    .sirokaKolona span {
+        font-size: 11px;
+    }
+
+.okvir {
+    width: 350px;
+    border: 3px solid black;
+    margin: 25px;
+    padding: 15px 15px 0 15px;
+    display: inline-block;
+    clear: both;
+    position: relative;
+}
+
+.footer {
+    vertical-align: bottom;
+    position: relative;
+    bottom: 0px;
+}
+
+.floatRight {
+    position: relative;
+    right: 0px;
+    margin: 0;
+    padding: 0;
+}
+
+    .floatRight image {
+        vertical-align: top;
+        top: 0px;
+    }
+
+.header {
+    position: relative;
+}
+
+    .header > img {
+        position: absolute;
+        top: 0px;
+    }

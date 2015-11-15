@@ -1,0 +1,91 @@
+﻿@model Online_Stamparija.Models.Korisnik
+
+<script type="text/javascript">
+    function PostaviAktivan() {
+        var cc = document.getElementById('c1');
+        var aktivan = document.getElementById('aktivan');
+        if (cc.checked)
+            Aktivan.value = 1;
+        else
+            Aktivan.value = 0;
+        return false;
+    }
+</script>
+
+@using(Html.BeginForm("Create", "Account"))
+{
+    @Html.AntiForgeryToken()
+
+    <ul>
+        <li>
+            <h4>Novi korisnik</h4>
+        </li>
+        <li>
+            @*@Html.LabelFor(model => model.UserName, htmlAttributes : new { @class = "control-label col-md-2" })*@
+            @Html.LabelFor(model => model.UserName)
+        </li>
+        <li>
+            @*@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+        </li>
+        <li>
+            @Html.LabelFor(model => model.Password, htmlAttributes : new { @class = "control-label col-md-2" })
+        </li>
+        <li>
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+        </li>
+        <li>
+            @Html.LabelFor(model => model.Email, htmlAttributes : new { @class = "control-label col-md-2" })
+        </li>
+        <li>
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </li>
+        <li>
+            @Html.LabelFor(model => model.Pozicija, htmlAttributes : new { @class = "control-label col-md-2" })
+        </li>
+        <li>
+            <select name="Pozicija">
+                @{
+                    foreach(var poz in Enum.GetNames(typeof(Online_Stamparija.Models.PozicijaEnum)))
+                    {
+                        Online_Stamparija.Models.PozicijaEnum val;
+                        Enum.TryParse(poz, out val);
+                        <option value="@((int)val)">@poz</option>
+                    }
+                }
+            </select>
+        </li>
+        <li>
+            @Html.LabelFor(model => model.Ime, htmlAttributes : new { @class = "control-label col-md-2" })
+        </li>
+        <li>
+            @Html.EditorFor(model => model.Ime)
+            @Html.ValidationMessageFor(model => model.Ime, "", new { @class = "text-danger" })
+        </li>
+        <li>
+            @Html.LabelFor(model => model.Prezime, htmlAttributes : new { @class = "control-label col-md-2" })
+        </li>
+        <li>
+            @Html.EditorFor(model => model.Prezime)
+            @Html.ValidationMessageFor(model => model.Prezime, "", new { @class = "text-danger" })
+        </li>
+        <li style="max-width: 280px;">
+            <input type="hidden" name="Aktivan" id="Aktivan" />
+            <label>Aktivan:</label>
+            <input type="checkbox" id="c1" name="cc" class="floatRight" onclick="javascript: PostaviAktivan()" />
+            <label for="c1"><span></span></label>
+            @*@Html.ValidationMessageFor(model => model.Aktivan, "", new { @class = "text-danger" })*@
+        </li>
+        <li>
+            <input type="submit" value="Create" class="btn btn-default" />
+        </li>
+
+    </ul>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

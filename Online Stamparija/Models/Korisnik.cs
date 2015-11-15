@@ -20,5 +20,7 @@ namespace Online_Stamparija.Models
         public string Ime { get; set; }
 
         public string Prezime { get; set; }
+
+        public int Aktivan { get; set; }
     }
 }

@@ -97,12 +97,23 @@ namespace Online_Stamparija.Controllers
             }
         }
 
-        // GET: Users/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Users/Ban/5
+        public ActionResult Ban(int id)
         {
             if(LogovaniKorisnik.Instanca.Logovan && LogovaniKorisnik.Instanca.Pozicija == 1)
             {
                 _dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.BANUJ_KORISNIKA,
+                    new Dictionary<string, object> { { "ID", id } });
+            }
+            return RedirectToAction("Index");
+        }
+
+        // GET: Users/Unban/5
+        public ActionResult Unban(int id)
+        {
+            if(LogovaniKorisnik.Instanca.Logovan && LogovaniKorisnik.Instanca.Pozicija == 1)
+            {
+                _dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.ODBANUJ_KORISNIKA,
                     new Dictionary<string, object> { { "ID", id } });
             }
             return RedirectToAction("Index");

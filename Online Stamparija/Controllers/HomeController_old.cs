@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace Online_Stamparija.Controllers
 {
-    public class HomeController: Controller
+    public class HomeController : Controller
     {
         public ActionResult Index()
         {
@@ -27,7 +26,6 @@ namespace Online_Stamparija.Controllers
 
             return View();
         }
-
         public ActionResult ForgotPass()
         {
             ViewBag.Message = "Enter your e-mail address:";

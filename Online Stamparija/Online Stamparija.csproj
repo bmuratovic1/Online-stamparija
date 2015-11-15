@@ -144,13 +144,25 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\funcije.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\addUser.B.png" />
+    <Content Include="Images\appbar.os.android.png" />
+    <Content Include="Images\appbar.os.windows.8.png" />
+    <Content Include="Images\appbar.scrabble.a.png" />
+    <Content Include="Images\appbar.scrabble.m.png" />
+    <Content Include="Images\appbar.scrabble.r.png" />
+    <Content Include="Images\appbar.shield.png" />
     <Content Include="Images\at.png" />
-    <Content Include="Images\brisi.png" />
+    <Content Include="Images\basecircle.png" />
     <Content Include="Images\olovka.png" />
+    <Content Include="Images\options.H.png" />
+    <Content Include="Images\options.V.png" />
+    <Content Include="Images\switch.off.B.png" />
+    <Content Include="Images\switch.on.B.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\LocalExport.pubxml" />
@@ -187,7 +199,8 @@
     </Content>
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Shared\Korisnik.cshtml" />
-    <Content Include="Views\Users\Novi.cshtml" />
+    <Content Include="Views\Shared\ForgotPass.cshtml" />
+    <Content Include="Views\Users\NoviKorisnik.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

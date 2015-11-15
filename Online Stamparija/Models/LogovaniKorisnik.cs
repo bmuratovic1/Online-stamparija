@@ -58,7 +58,7 @@ namespace Online_Stamparija.Models
             {
                 lock(_brava)
                 {
-                    var TRAJANjE_SESIJE = 1;
+                    var TRAJANjE_SESIJE = 15;
                     HttpContext.Current.Session.Timeout = TRAJANjE_SESIJE;
 
                     if(HttpContext.Current.Session["sesija"] == null)

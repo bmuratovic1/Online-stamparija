@@ -11,47 +11,63 @@ namespace OnliStam.Pomocnici
         public class StoredProcedures
         {
             public static readonly SqlUpit DAJ_KORISNIKA_ID = new SqlUpit("DajKorisnika_ID", "", new List<string> { "@korisnikId" });
-            
+
             public static readonly SqlUpit DAJ_KORISNIKA_EMAIL = "DajKorisnika_Email";
-            
+
             public static readonly SqlUpit DAJ_KORISNIKA_UNAME_PASS = new SqlUpit("DajKorisnika",
                 @"SELECT * 
 	FROM korisnici
 	WHERE
 		Username = @Username
         AND Aktivan=1",
-                                 new List<string> { "Username"});
-            
-            public static readonly SqlUpit REGISTRUJ_KORISNIKA = "RegistrujKorisnika";
-            
+                                 new List<string> { "Username" });
+
+            public static readonly SqlUpit REGISTRUJ_KORISNIKA = new SqlUpit("RegistrujKorisnika",
+                @"INSERT INTO korisnici(
+                    Username,
+                    Password,
+                    Email,
+                    Pozicija,
+                    Ime,
+                    Prezime
+                )VALUES(
+                    @Username,
+                    @Password,
+                    @Email,
+                    @Pozicija,
+                    @Ime,
+                    @Prezime
+                )",
+                new List<string> { "Username", "Password", "Email", "Pozicija", "Ime", "Prezime" });
+
             public static readonly SqlUpit DAJ_POSAO_ID = "DajPosao_ID";
-            
+
             public static readonly SqlUpit DODAJ_POSAO = "UnesiPosao";
-            
+
             public static readonly SqlUpit DAJ_ZAVRSENE_POSLOVE = "DajZavrsenePoslove";
-            
+
             public static readonly SqlUpit DAJ_NEZAVRSENE_POSLOVE = "DajNezavrsenePoslove";
-            
+
             public static readonly SqlUpit DODAJ_DTP = "DodajDTP";
-            
+
             public static readonly SqlUpit POTVRDI_REGISTRACIJU = "PotvrdiRegistraciju";
-            
+
             public static readonly SqlUpit PROMJENA_LOZINKE = "PromjeniLozinku";
-            
+
             public static readonly SqlUpit DAJ_LOGOVE = new SqlUpit("DajLogove", "SELECT * FROM Logovi ORDER BY Datum DESC", new List<string>());
-            
+
             public static readonly SqlUpit DAJ_LOGOVE_TIP =
-                new SqlUpit("DajLogove_Tip", 
+                new SqlUpit("DajLogove_Tip",
 @"SELECT * FROM Logovi
 WHERE @Tip = @tip
-ORDER BY Datum DESC", 
-new List<string>{"Tip"});
-            
+ORDER BY Datum DESC",
+new List<string> { "Tip" });
+
             public static readonly SqlUpit DAJ_LOG_ZADNjI_MINUTE = new SqlUpit("DajLogZadnjiMinute",
 @"SELECT * FROM Logovi
 WHERE date_add(Datum, INTERVAL @minute MINUTE) <= < NOW()
 ORDER BY Datum DESC",
-new List<string>{"Minute"});
+new List<string> { "Minute" });
 
             public static readonly SqlUpit DODAJ_LOG = new SqlUpit("DodajLog",
 @"INSERT INTO Logovi(
@@ -69,7 +85,7 @@ VALUES(
                     "Tip",
                     "Datum"
                 });
-            
+
             public static readonly SqlUpit ZAHTJEV_NOVA_LOZINKA = "ZahtjevNovaLozinka";
             public static readonly SqlUpit PROMJENI_LOZINKU = "PromijeniLozinku";
             public static readonly SqlUpit DODAJ_REPROMATERIJAL = "DodajRepromaterijal";
@@ -83,8 +99,16 @@ VALUES(
             public static readonly SqlUpit DAJ_SVE_KORISNIKE = new SqlUpit("DajSveKorisnike",
                 "SELECT * FROM korisnici",
                 new List<string> { });
-            public static readonly SqlUpit BANUJ_KORISNIKA = "BanujKorisnika";
-            public static readonly SqlUpit ODBANUJ_KORISNIKA = "OdbanujKorisnika";
+            public static readonly SqlUpit BANUJ_KORISNIKA = new SqlUpit("BanujKorisnika",
+                @"UPDATE korisnici
+                SET Aktivan = 0
+                WHERE ID = @ID",
+                               new List<string> { "ID" });
+            public static readonly SqlUpit ODBANUJ_KORISNIKA = new SqlUpit("OdbanujKorisnika",
+                @"UPDATE korisnici
+                SET Aktivan = 1
+                WHERE ID = @ID",
+                               new List<string> { "ID" });
             public static readonly SqlUpit UNAPRIJEDI_KORISNIKA = "UnaprijediKorisnika";
             public static readonly SqlUpit NAZADUJ_KORISNIKA = "UnazadiKorisnika";
             public static readonly SqlUpit DAJ_DTP = "DajDtp";

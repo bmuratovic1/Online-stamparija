@@ -1,15 +1,25 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-@{
-    ViewBag.Title = "Forgot password";
-}
-<br />
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-<input type="email" name="email" />
-</body>
-</html>
+﻿<form action="~/Account/Login" method="get">
+    <ul>
+        <li>
+            @Html.AntiForgeryToken()
+        </li>
+        <li>
+            <h3>
+                <a href="javascript:pokaziSakrij('login'); pokaziSakrij('zaborLoz');">
+                    <img src="~/Images/lef.B.png" class="iconButtonBijeli mali" />
+                    <span>Nazad</span>
+                </a>
+            </h3>
+        </li>
+        <li>
+            <label>Email</label>
+        </li>
+        <li>
+            <input type="email" name="email" />
+        </li>
+        <li>
+
+            <input type="submit" />
+        </li>
+    </ul>
+</form>

@@ -3,17 +3,67 @@
 @{
     ViewBag.Title = "Administrativna ploca";
 }
+@*<link rel="stylesheet" type="text/css" href="/Content/Site.css">*@
 
+<div class="desniBar" id="obicnaDesnaTraka">
+    <ul class="nav navbar-nav">
+        <li>
+            <div class="metroButton">
+                @*<a href="@Url.Action("Create")">*@
+                <a href="javascript: pokaziSakrij('prosireaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')">
+                    <img src="~/Images/addUser.B.png" />
+                    <span>Novi Korisnik</span>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="metroButton">
+                <a href="@Url.Action("Create")">
+                    <img src="~/Images/settings.B.png" />
+                    <span>Podešavanja</span>
+                </a>
+            </div>
+        </li>
+    </ul>
+
+    <div class="footer metroButton" style="position:absolute; bottom:0; align-self:center; margin-bottom:35px">
+        <img id="optionsH" src="~/Images/options.H.png" class="" />
+        <img id="optionsV" src="~/Images/options.V.png" style="visibility:collapse" />
+    </div>
+</div>
+
+<div class="desniBarSiroki" id="prosireaDesnaTraka" style="display:none">
+    <ul>
+        <li>
+            <h3>
+                <a href="javascript: pokaziSakrij('prosireaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')">
+                    <img src="~/Images/lef.B.png" class="iconButtonBijeli mali" />
+                    <span>Nazad</span>
+                </a>
+            </h3>
+        </li>
+        <li>
+            <div id="noviKorisnik">
+                @Html.Partial("NoviKorisnik", new Online_Stamparija.Models.Korisnik())
+            </div>
+        </li>
+    </ul>
+</div>
+<br />
 <h2>Administrativna ploča</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-
 <div>
-    @foreach(var item in Model)
+    @foreach(var item in Model.Where(m => m.Aktivan == 1))
     {
         @Html.Partial("Korisnik", item);
     }
 </div>
+@if(Model.Any(m => m.Aktivan != 1))
+{
+    <h4>Banovani korisnici</h4>
+    <hr />
+    foreach(var item in Model.Where(m => m.Aktivan != 1))
+    {
+        @Html.Partial("Korisnik", item);
+    }
+}
