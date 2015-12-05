@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="OnliStam.Dashboard.View.UCNovaTabela"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:enums="clr-namespace:OnliStam.Dashboard.Enums"
+        xmlns:converters="clr-namespace:OnliStam.Dashboard.Converters">
+
+    <Control.Resources>
+        <Style TargetType="ListItem">
+
+        </Style>
+
+        <converters:EnumToStringConverter x:Key="EnumToStringConverter" />
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="GetMySqlTypes">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:MySqlTipovi"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="GetMySqlKeys">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="enums:MySqlKljucevi"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Control.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label>Ime tabele:</Label>
+            <TextBox Grid.Column="1" Text="{Binding Path=Ime}"/>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" Name="DefinicijaTabele" Margin="7">
+            <!--<DataGrid AutoGenerateColumns="False" HorizontalAlignment="Left" Name="dataGrid1" VerticalAlignment="Top"
+                      ItemsSource="{Binding Path=Kolone}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Ime}" MinWidth="50" Header="Ime Kolone" />
+                    <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource GetEnumValues}, Converter={StaticResource EnumToStringConverter}}" 
+                                            SelectedValueBinding="{Binding Path=Tip}" MinWidth="50" Header="Tip"/>
+                    <DataGridTextColumn Binding="{Binding Path=Key}" MinWidth="50" Header="Ključ" />
+                    <DataGridCheckBoxColumn Binding="{Binding Path=Nullable}" MinWidth="50" Header="Nulabilno" />
+                    <DataGridTextColumn Binding="{Binding Path=Extra}" MinWidth="50" Header="Dodatno"/>
+                </DataGrid.Columns>
+            </DataGrid>-->
+            <DataGrid AutoGenerateColumns="False" HorizontalAlignment="Left" Name="dataGrid1" VerticalAlignment="Top"
+                      ItemsSource="{Binding Kolone}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=Ime}" MinWidth="50" Header="Ime Kolone" />
+
+                    <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource GetMySqlTypes},
+                        Converter={StaticResource EnumToStringConverter}, ConverterParameter={x:Type enums:MySqlTipovi}}"
+                                            SelectedValueBinding="{Binding Path=Tip}" MinWidth="50" Header="Tip"/>
+                    <DataGridComboBoxColumn ItemsSource="{Binding Source={StaticResource GetMySqlKeys},
+                        Converter={StaticResource EnumToStringConverter}, ConverterParameter={x:Type enums:MySqlKljucevi}}"
+                        SelectedValueBinding="{Binding Path=Key}" MinWidth="50" Header="Ključ" />
+                    <DataGridCheckBoxColumn Binding="{Binding Path=Nullable}" MinWidth="50" Header="Nulabilno" />
+                    <DataGridCheckBoxColumn Binding="{Binding Path=AutoIncrement}" MinWidth="50" Header="Auto Increment"/>
+                    <DataGridTextColumn Binding="{Binding Path=Default}" MinWidth="50" Header="Default"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Click="Button_Click">Nazad</Button>
+            <Button Grid.Column="1" Click="Button_Click_1">Snimi</Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -51,7 +51,7 @@ namespace OnliStam.Pomocnici
         public string DodajTabelu(string imeBaze, string imeTabele)
         {
             _stringBuilder = new StringBuilder();
-            _stringBuilder.Append(string.Format("CREATE TABLE {0}.{1} (", imeBaze, imeTabele));
+            _stringBuilder.AppendFormat("CREATE TABLE {1} (", imeBaze, imeTabele);
             
             return  _stringBuilder.ToString();
         }
@@ -78,9 +78,9 @@ namespace OnliStam.Pomocnici
                 _stringBuilder.Append("AUTO_INCREMENT ");
             _stringBuilder.AppendLine(",");
             if(kljuc == "PRI")
-                _stringBuilder.AppendFormat("\tPRIMARY KEY ({0}),{1}", imeKolone, Environment.NewLine);
+                _stringBuilder.AppendFormat("PRIMARY KEY ({0}),{1}", imeKolone, Environment.NewLine);
             if(kljuc == "UNI")
-                _stringBuilder.AppendFormat("\tUNIQUE KEY {0} ({0}),{1}", imeKolone, Environment.NewLine);
+                _stringBuilder.AppendFormat("UNIQUE KEY {0} ({0}),{1}", imeKolone, Environment.NewLine);
 
             return _stringBuilder.ToString();
         }
