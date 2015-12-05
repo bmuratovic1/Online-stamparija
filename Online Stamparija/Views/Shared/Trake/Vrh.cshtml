@@ -1,0 +1,46 @@
+﻿<div class="row navbar-fixed-top navbar-inverse">
+    <div class="metrobutton hidden-xs col-sm-1">
+        <a href="@Url.Action("Index", "Home")">
+            <img src="~/Images/home.B.png" title="Početna stranica" />
+        </a>
+    </div>
+    <div class="metroButton hidden-xs col-sm-1">
+        <a href="@Url.Action("About", "Home")">
+            <img src="~/Images/about.png" title="O nama" />
+        </a>
+    </div>
+    <div class="metroButton hidden-xs col-sm-1">
+        <a href="@Url.Action("Contact", "Home")">
+            <img src="~/Images/contacts.B.png" title="Kontakti" />
+        </a>
+    </div>
+    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1)
+    {
+        <div class="metroButton hidden-xs col-sm-1">
+            <a href="@Url.Action("Index", "Users")">
+                <img src="~/Images/settings1.B.png" title="Administrativna ploča" />
+            </a>
+        </div>
+    }
+    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
+    {
+        <div class="metroButton hidden-xs col-sm-1">
+            <a href="@Url.Action("Index", "Posao")">
+                <img src="~/Images/posao.B.png" title="Poslovi" />
+            </a>
+        </div>
+    }
+    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName != null)
+    {
+        <div class="metroButton col-xs-3 col-sm-1 pull-right">
+            <a href="@Url.Action("Logout", "Account")">
+                <img src="~/Images/logout.B.png" title="Logout" />
+            </a>
+        </div>
+        <h3 style="color:white" class="col-xs pull-right">Dobro dosao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3>
+    }
+</div>
+
+@*">
+    <div class="hidden-xs col-sm-12">
+        <div class="row  navbar*@

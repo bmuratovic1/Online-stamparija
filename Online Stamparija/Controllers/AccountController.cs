@@ -1,10 +1,6 @@
 ﻿using Online_Stamparija.Models;
 using OnliStam.Pomocnici;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Online_Stamparija.Controllers
@@ -14,7 +10,7 @@ namespace Online_Stamparija.Controllers
         // GET: Account
         public ActionResult Index()
         {
-            return View();
+            return View("Index", "Users");
         }
 
         // GET: Account/Details/5
@@ -56,9 +52,10 @@ namespace Online_Stamparija.Controllers
 
                 return RedirectToAction("Index", "Users");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                TempData["Error"] = ex.Message;
+                return RedirectToAction("Index", "Users");
             }
         }
 

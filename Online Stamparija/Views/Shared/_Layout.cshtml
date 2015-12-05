@@ -9,91 +9,8 @@
     <script src="~/Content/funcije.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <table style="width:100%">
-            <tr>
-                <td>
-                    <div class="container">
-                        <div class="navbar-header">
-                            @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>*@
-                            @Html.ActionLink("Online Stamparija", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li style="max-width:81px">
-                                <div class="metroButton">
-                                    <a href="@Url.Action("Index", "Home")">
-                                        <img src="~/Images/home.B.png" title="Početna stranica" />
-                                    </a>
-                                </div>
-                            </li>
-                            <li style="max-width:81px">
-                                <div class="metroButton">
-                                    <a href="@Url.Action("About", "Home")">
-                                        <img src="~/Images/about.png" title="O nama" />
-                                    </a>
-                                </div>
-                            </li>
-                            <li style="max-width:81px">
-                                <div class="metroButton">
-                                    <a href="@Url.Action("Contacts", "Home")">
-                                        <img src="~/Images/contacts.B.png" title="Kontakti" />
-                                    </a>
-                                </div>
-                            </li>
-                            @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1)
-                            {
-                                <li style="max-width:81px">
-                                    <div class="metroButton">
-                                        <a href="@Url.Action("Index", "Users")">
-                                            <img src="~/Images/settings1.B.png" title="Administrativna ploča" />
-                                        </a>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </td>
-                <td style="float:right">
-                    <div>
-                        @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName == null)
-                        {
-                            <div class="desniBarSiroki">
-                                <div id="login">
-                                    @Html.Partial("Login", new Online_Stamparija.Models.Korisnik());
-                                </div>
-                                <div id="zaborLoz" style="display:none">
-                                    @Html.Partial("ForgotPass");
-                                </div>
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li style="color:white"><h3>Dobro dosao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3></li>
-                                    <li style="max-width:81px">
-                                        <div class="metroButton">
-                                            <a href="@Url.Action("Logout", "Account")">
-                                                <img src="~/Images/logout.B.png" title="Logout" />
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        }
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+    @Html.Partial("Trake/Vrh")
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -105,5 +22,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required : false)
+
 </body>
 </html>

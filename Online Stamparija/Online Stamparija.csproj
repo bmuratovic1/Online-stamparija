@@ -132,12 +132,14 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PosaoController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\LogovaniKorisnik.cs" />
+    <Compile Include="Models\Posao.cs" />
     <Compile Include="Models\PozicijaEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -156,10 +158,13 @@
     <Content Include="Images\appbar.scrabble.m.png" />
     <Content Include="Images\appbar.scrabble.r.png" />
     <Content Include="Images\appbar.shield.png" />
+    <Content Include="Images\posao.B.png" />
     <Content Include="Images\at.png" />
     <Content Include="Images\basecircle.png" />
     <Content Include="Images\olovka.png" />
+    <Content Include="Images\options.H.B.png" />
     <Content Include="Images\options.H.png" />
+    <Content Include="Images\options.V.B.png" />
     <Content Include="Images\options.V.png" />
     <Content Include="Images\switch.off.B.png" />
     <Content Include="Images\switch.on.B.png" />
@@ -201,6 +206,16 @@
     <Content Include="Views\Shared\Korisnik.cshtml" />
     <Content Include="Views\Shared\ForgotPass.cshtml" />
     <Content Include="Views\Users\NoviKorisnik.cshtml" />
+    <Content Include="Views\Shared\MenuItems\NavigationControls.cshtml" />
+    <Content Include="Views\Shared\Upozorenja\Greska.cshtml" />
+    <Content Include="Views\Shared\Trake\Vrh.cshtml" />
+    <Content Include="Views\Posao\Index.cshtml" />
+    <Content Include="Views\Posao\Novi.cshtml" />
+    <Content Include="Views\Posao\Uredi.cshtml" />
+    <Content Include="Views\Posao\Obrisi.cshtml" />
+    <Content Include="Views\Posao\Detalji.cshtml" />
+    <Content Include="Views\Shared\Trake\Bok.cshtml" />
+    <Content Include="Views\Shared\Trake\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

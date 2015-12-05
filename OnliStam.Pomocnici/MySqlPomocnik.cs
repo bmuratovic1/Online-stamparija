@@ -14,7 +14,7 @@ namespace OnliStam.Pomocnici
 
         #region ***** CONSTANTS ****
 
-        private readonly string CONNECTION_STRING = "";
+        public static string CONNECTION_STRING = "";
 
         #endregion
 
@@ -36,7 +36,8 @@ namespace OnliStam.Pomocnici
         {
             try
             {
-                CONNECTION_STRING = ConfigurationManager.ConnectionStrings["MySqlConnectionString"].ConnectionString;
+                if(string.IsNullOrEmpty(CONNECTION_STRING))
+                    CONNECTION_STRING = KonfiguracioniPomocnik.DajSqlKonekciju("MySqlConnectionString"); //ConfigurationManager.ConnectionStrings["MySqlConnectionString"].ConnectionString;
             }
             catch(ConfigurationErrorsException ceex)
             {
@@ -95,6 +96,7 @@ namespace OnliStam.Pomocnici
                 }
                 catch(Exception ex) {
                     new Zapisnik(null).Zapisi(ex.ToString(), 3);
+                    throw;
                 }
                 return odgovor;
             }

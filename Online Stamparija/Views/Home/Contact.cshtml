@@ -1,9 +1,41 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<br />
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+
+@if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName == null)
+{
+    <div class="desniBar" id="obicnaDesnaTraka">
+        <div class="metroButton" style="position:fixed; bottom:0; margin:7px">
+            <a href="javascript: pokaziSakrij('prosireaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')">
+                <img src="~/Images/options.V.B.png" />
+            </a>
+        </div>
+    </div>
+    <div class="desniBarSiroki" id="prosireaDesnaTraka" style="display:none">
+        <div id="login">
+            @Html.Partial("Login", new Online_Stamparija.Models.Korisnik());
+        </div>
+        <div id="zaborLoz" style="display:none">
+            @Html.Partial("ForgotPass");
+        </div>
+        <div class="metroButton" style="position:fixed; bottom:0; margin:7px">
+            <a href="javascript: pokaziSakrij('prosireaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')">
+                <img src="~/Images/options.V.B.png" />
+            </a>
+        </div>
+    </div>
+}
+<div class="jumbotron">
+    <h1>Online Štamparija</h1>
+</div>
+
+@if(ViewBag.Error != null || TempData["Error"] != null)
+{
+    <div class="upozorenje greska" id="greska">
+        <span>@ViewBag.Error@TempData["Error"]</span>
+        <span onclick="javascript: pokaziSakrij('greska');" style="position:absolute; right:0; top:0; margin:7px;  cursor: pointer; cursor: hand;">x</span>
+    </div>
+}
 
 <address>
     One Microsoft Way<br />

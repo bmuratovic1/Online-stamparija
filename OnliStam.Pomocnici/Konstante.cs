@@ -40,13 +40,41 @@ namespace OnliStam.Pomocnici
                 )",
                 new List<string> { "Username", "Password", "Email", "Pozicija", "Ime", "Prezime" });
 
-            public static readonly SqlUpit DAJ_POSAO_ID = "DajPosao_ID";
+            public static readonly SqlUpit DAJ_POSAO_ID = new SqlUpit("DajPosao_ID",
+@"SELECT *
+FROM poslovi
+WHERE ID = @ID",
+               new List<string> { "ID" });
 
-            public static readonly SqlUpit DODAJ_POSAO = "UnesiPosao";
+            public static readonly SqlUpit DODAJ_POSAO = new SqlUpit("UnesiPosao",
+@"INSERT INTO poslovi(
+    Naziv,
+    Opis,
+    VrijemeTrajanja,
+    VrstaMaterijala,
+    KolicinaMaterijala,
+    Status
+)VALUES(
+    @Naziv,
+    @Opis,
+    @VrijemeTrajanja,
+    @VrstaMaterijala,
+    @KolicinaMaterijala,
+    @Status
+);",
+                new List<string> { "Naziv", "Opis", "VrijemeTrajanja", "VrstaMaterijala", "KolicinaMaterijala", "Status" });
 
-            public static readonly SqlUpit DAJ_ZAVRSENE_POSLOVE = "DajZavrsenePoslove";
+            public static readonly SqlUpit DAJ_ZAVRSENE_POSLOVE = new SqlUpit("DajZavrsenePoslove",
+@"SELECT *
+FROM poslovi
+WHERE Status = 1",
+                  new List<string>());
 
-            public static readonly SqlUpit DAJ_NEZAVRSENE_POSLOVE = "DajNezavrsenePoslove";
+            public static readonly SqlUpit DAJ_NEZAVRSENE_POSLOVE = new SqlUpit("DajNezavrsenePoslove",
+@"SELECT *
+FROM poslovi
+WHERE Status <> 1",
+                  new List<string>());
 
             public static readonly SqlUpit DODAJ_DTP = "DodajDTP";
 
