@@ -132,6 +132,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MaterijaliController.cs" />
     <Compile Include="Controllers\PosaoController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -139,6 +140,7 @@
     </Compile>
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\LogovaniKorisnik.cs" />
+    <Compile Include="Models\Materijal.cs" />
     <Compile Include="Models\Posao.cs" />
     <Compile Include="Models\PozicijaEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
