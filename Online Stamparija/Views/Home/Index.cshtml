@@ -2,6 +2,14 @@
     ViewBag.Title = "Home Page";
 }
 
+<div>
+    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName == null)
+    {
+        @Html.Partial("Trake/Login")
+    }
+    <div class="jumbotron">
+        <h1>Online Štamparija</h1>
+    </div>
 
 
 @if(ViewBag.Error != null || TempData["Error"]!=null)
@@ -10,6 +18,7 @@
         <span>@ViewBag.Error + @TempData["Error"]</span>
     </div>
 }
+    @Html.Partial("Upozorenja/Greska", TempData["Error"])
 
 
 
@@ -115,8 +124,8 @@ All new issues worldwide will be recorded (sometimes with some delay), with the 
           
             Freestampcatalogue is free for everyone to use.
             All new issues worldwide will be recorded (sometimes with some delay), with the exception of the issues from; Guinea Republic, Guinea-Bissau, Comores, Mozambique, Saint Thomas and Togo. These countries are banned by us for the time being in connection with the massive flood of (topical) issues with high face values, issued by an agency in Lithuania. As soon as these countries turn to more serious releases, we will record them again.
-        </div>
     </div>
+</div>
 
 
 

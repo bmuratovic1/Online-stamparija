@@ -4,12 +4,12 @@
     ViewBag.Title = "Administrativna ploca";
 }
 @*<link rel="stylesheet" type="text/css" href="/Content/Site.css">*@
+@Html.Partial("Upozorenja/Greska", TempData["Error"])
 
 <div class="desniBar" id="obicnaDesnaTraka">
     <ul class="nav navbar-nav">
         <li>
             <div class="metroButton">
-                @*<a href="@Url.Action("Create")">*@
                 <a href="javascript: pokaziSakrij('prosireaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')">
                     <img src="~/Images/addUser.B.png" />
                     <span>Novi Korisnik</span>

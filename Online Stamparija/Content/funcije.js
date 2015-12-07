@@ -4,5 +4,5 @@
         obj.style.display = 'block';
     else
         obj.style.display = 'none';
-    return false;
+    //return false;
 }

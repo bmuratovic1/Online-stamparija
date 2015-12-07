@@ -2,9 +2,7 @@
 using OnliStam.Pomocnici;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Online_Stamparija.Controllers
@@ -33,8 +31,16 @@ namespace Online_Stamparija.Controllers
         {
             if(LogovaniKorisnik.Instanca.Logovan && LogovaniKorisnik.Instanca.Pozicija == (int)PozicijaEnum.Administrator)
             {
-                var korisnici = _dbPomocnik.IzvrsiProceduru<Korisnik, Korisnik>(Konstante.StoredProcedures.DAJ_SVE_KORISNIKE, new Korisnik());
+                var korisnici = new List<Korisnik>();
+                try
+                {
+                    korisnici = _dbPomocnik.IzvrsiProceduru<Korisnik, Korisnik>(Konstante.StoredProcedures.DAJ_SVE_KORISNIKE, new Korisnik());
 
+                }
+                catch(Exception ex)
+                {
+                    TempData["Error"] = ex.Message;
+                }
                 return View(korisnici);
             }
             Response.StatusCode = (int)HttpStatusCode.NotFound;
@@ -113,8 +119,15 @@ namespace Online_Stamparija.Controllers
         {
             if(LogovaniKorisnik.Instanca.Logovan && LogovaniKorisnik.Instanca.Pozicija == 1)
             {
-                _dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.ODBANUJ_KORISNIKA,
-                    new Dictionary<string, object> { { "ID", id } });
+                try
+                {
+                    _dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.ODBANUJ_KORISNIKA,
+                        new Dictionary<string, object> { { "ID", id } });
+                }
+                catch(Exception ex)
+                {
+                    TempData["Error"] = ex.Message;
+                }
             }
             return RedirectToAction("Index");
         }

@@ -51,13 +51,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IDbPomocnik.cs" />
+    <Compile Include="ConnectionString.cs" />
+    <Compile Include="Interfejsi\IDbPomocnik.cs" />
+    <Compile Include="Interfejsi\IDbUrednik.cs" />
     <Compile Include="JsonContent.cs" />
+    <Compile Include="KonfiguracioniPomocnik.cs" />
     <Compile Include="Konstante.cs" />
     <Compile Include="KriptoPomocnik.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="MsSqlPomocnik.cs" />
     <Compile Include="MySqlPomocnik.cs" />
+    <Compile Include="MySqlUrednik.cs" />
     <Compile Include="Privilegija.cs" />
     <Compile Include="SqlProcedure.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
