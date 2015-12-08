@@ -144,6 +144,23 @@ VALUES(
             public static readonly SqlUpit DAJ_STAMPU = "DajStampu";
             public static readonly SqlUpit POTVRDI_POSAO = "PotvrdiPosao";
             public static readonly SqlUpit DAJ_PODATKE_ZA_GRAF = "DajPodatkeZaGraf_1";
+            public static readonly SqlUpit DAJ_MATERIJAL_ID = new SqlUpit("DajMaterijal_ID", 
+                @"SELECT *
+                FROM materijali
+                WHERE ID = {ID};",
+                                 new List<string>{"ID"});
+            public static readonly SqlUpit DAJ_MATERIJALE = new SqlUpit("DajMaterijale",
+                @"SELECT * FROM materijali", new List<string>());
+            public static SqlUpit DODAJ_MATERIJAL = new SqlUpit("DodajMaterijale",
+                @"INSERT INTO materijali(
+                    Naziv,
+                    Opis,
+                    Kolicina
+                ) VALUES (
+                    @Naziv,
+                    @Opis,
+                    @Kolicina
+                );", new List<string> { "Naziv", "Opis", "Kolicina" });
         }
 
         public struct EMailTemplates

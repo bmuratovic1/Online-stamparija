@@ -218,6 +218,11 @@
     <Content Include="Views\Posao\Detalji.cshtml" />
     <Content Include="Views\Shared\Trake\Bok.cshtml" />
     <Content Include="Views\Shared\Trake\Login.cshtml" />
+    <Content Include="Views\Materijali\Index.cshtml" />
+    <Content Include="Views\Materijali\Novi.cshtml" />
+    <Content Include="Views\Materijali\Detalji.cshtml" />
+    <Content Include="Views\Materijali\Obrisi.cshtml" />
+    <Content Include="Views\Materijali\Uredi.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
