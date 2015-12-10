@@ -76,6 +76,9 @@ FROM poslovi
 WHERE Status <> 1",
                   new List<string>());
 
+            public static readonly SqlUpit IZBRISI_POSAO = new SqlUpit("IzbrisiPosao",
+                @"DELETE FROM poslovi WHERE ID = @ID", new List<string> { "ID" });
+
             public static readonly SqlUpit DODAJ_DTP = "DodajDTP";
 
             public static readonly SqlUpit POTVRDI_REGISTRACIJU = "PotvrdiRegistraciju";
@@ -147,7 +150,7 @@ VALUES(
             public static readonly SqlUpit DAJ_MATERIJAL_ID = new SqlUpit("DajMaterijal_ID", 
                 @"SELECT *
                 FROM materijali
-                WHERE ID = {ID};",
+                WHERE ID = @ID;",
                                  new List<string>{"ID"});
             public static readonly SqlUpit DAJ_MATERIJALE = new SqlUpit("DajMaterijale",
                 @"SELECT * FROM materijali", new List<string>());
@@ -161,6 +164,16 @@ VALUES(
                     @Opis,
                     @Kolicina
                 );", new List<string> { "Naziv", "Opis", "Kolicina" });
+
+            public static SqlUpit IZMJENI_MATERIJAL = new SqlUpit("IzmjeniMaterijal",
+                @"UPDATE materijali
+SET Naziv = @Naziv,
+    Opis = @Opis,
+    Kolicina = @Kolicina 
+WHERE ID = @ID;", new List<string> { "ID", "Naziv", "Opis", "Kolicina" });
+
+            public static readonly SqlUpit IZBRISI_MATERIJAL = new SqlUpit("IzbrisiMaterijal",
+                @"DELETE FROM materijali WHERE ID = @ID", new List<string> { "ID" });
         }
 
         public struct EMailTemplates

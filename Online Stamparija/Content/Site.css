@@ -69,8 +69,15 @@ textarea {
         text-align: center;
     }
 
+    .metroButton img {
+        width: 75px;
+        height: 75px;
+    }
+
     .metroButton:hover img {
         background-color: rgba(39, 36, 36, 0.3);
+        width: 75px;
+        height: 75px;
     }
 
     .metroButton:hover span {
@@ -95,7 +102,7 @@ textarea {
     right: 0px;
     position: fixed;
     height: 100%;
-    bottom:0;
+    bottom: 0;
     padding-top: 55px;
     vertical-align: middle;
     margin: 0;
@@ -244,6 +251,10 @@ textarea {
     padding-left: 20px;
     padding-right: 25px;
 }
+
+    .upozorenje p {
+        white-space: pre;
+    }
 
     .upozorenje.greska {
         background-color: rgba(250,128,128,0.7);

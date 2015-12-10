@@ -160,6 +160,7 @@
     <Content Include="Images\appbar.scrabble.m.png" />
     <Content Include="Images\appbar.scrabble.r.png" />
     <Content Include="Images\appbar.shield.png" />
+    <Content Include="Images\materijali.png" />
     <Content Include="Images\posao.B.png" />
     <Content Include="Images\at.png" />
     <Content Include="Images\basecircle.png" />

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Online_Stamparija.Models;
+using OnliStam.Pomocnici;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +13,21 @@ namespace Online_Stamparija.Controllers
     {
         public ActionResult Index()
         {
+            if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
+            {
+                var dbPomocnik = new MySqlPomocnik();
+                var materijali = dbPomocnik.IzvrsiProceduru<Materijal, Materijal>(Konstante.StoredProcedures.DAJ_MATERIJALE, new Materijal());
+                if(materijali.Any(m => m.Kolicina < 10))
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.AppendLine("Sljedeći materijali će uskoro biti istrošeni:");
+                    foreach(var m in materijali.Where(m1 => m1.Kolicina < 10))
+                        sb.AppendFormat("\t{0} : {1}{2}", m.Naziv, m.Kolicina, Environment.NewLine);
+                    if(TempData["Error"] != null)
+                        TempData["Error"] += "\n\n";
+                    TempData["Error"] += sb.ToString();
+                }
+            }
             return View();
         }
 

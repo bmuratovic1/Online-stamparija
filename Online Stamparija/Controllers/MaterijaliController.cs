@@ -93,7 +93,9 @@ namespace Online_Stamparija.Controllers
         {
             if (Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
             {
-                return View("Uredi");
+                var dbPomocnik = new MySqlPomocnik();
+                Materijal model = dbPomocnik.IzvrsiProceduru<Materijal>(Konstante.StoredProcedures.DAJ_MATERIJAL_ID, new Dictionary<string, object> { { "ID", id } });
+                return View("Uredi", model);
             }
             else
             {
@@ -109,12 +111,14 @@ namespace Online_Stamparija.Controllers
             {
                 try
                 {
-                    TempData["Error"] = "Operacija nije podrzana!";
+                    IDbPomocnik dbPomocnik = new MySqlPomocnik();
+                    dbPomocnik.IzvrsiProceduru<Materijal>(Konstante.StoredProcedures.IZMJENI_MATERIJAL, model);
                     return RedirectToAction("Index");
                 }
-                catch
+                catch(Exception ex)
                 {
-                    return View();
+                    TempData["Error"] = ex.Message;
+                    return RedirectToAction("Index");
                 }
             }
             else
@@ -154,13 +158,14 @@ namespace Online_Stamparija.Controllers
             {
                 try
                 {
-                    // TODO: Add delete logic here
-                    TempData["Error"] = "Operacija nije podrzana!";
+                    var dbPomocnik = new MySqlPomocnik();
+                    dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.IZBRISI_MATERIJAL, new Dictionary<string, object> { { "ID", id } });
                     return RedirectToAction("Index");
                 }
-                catch
+                catch(Exception ex)
                 {
-                    return View();
+                    TempData["Error"] = ex.Message;
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else

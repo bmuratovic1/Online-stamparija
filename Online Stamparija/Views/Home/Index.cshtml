@@ -12,12 +12,12 @@
     </div>
 
 
-@if(ViewBag.Error != null || TempData["Error"]!=null)
+@*@if(ViewBag.Error != null || TempData["Error"]!=null)
 {
     <div class="alert alert-danger" style="float:left">
         <span>@ViewBag.Error + @TempData["Error"]</span>
     </div>
-}
+}*@
     @Html.Partial("Upozorenja/Greska", TempData["Error"])
 
 

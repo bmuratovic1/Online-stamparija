@@ -30,6 +30,14 @@
             </a>
         </div>
     }
+    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
+    {
+        <div class="metroButton hidden-xs col-sm-1">
+            <a href="@Url.Action("Index", "Materijali")">
+                <img src="~/Images/materijali.png" title="Materijali" />
+            </a>
+        </div>
+    }
     @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName != null)
     {
         <div class="metroButton col-xs-3 col-sm-1 pull-right">

@@ -44,7 +44,7 @@ namespace Online_Stamparija.Controllers
                 {
                     var dbPomocnik = new MySqlPomocnik();
                     model = dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.DAJ_POSAO_ID, new Dictionary<string, object> { { "ID", id } });
-                }
+                    }
                 catch(Exception ex)
                 {
                     TempData["Error"] = ex.Message;
@@ -62,6 +62,8 @@ namespace Online_Stamparija.Controllers
         {
             if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
             {
+                var dbPomocnik = new MySqlPomocnik();
+                ViewBag.Materijali = dbPomocnik.IzvrsiProceduru<Materijal, Materijal>(Konstante.StoredProcedures.DAJ_MATERIJALE, new Models.Materijal());
                 return View("Novi");
             }
             else
@@ -79,6 +81,21 @@ namespace Online_Stamparija.Controllers
                 try
                 {
                     var dbPomocnik = new MySqlPomocnik();
+                    int materijalId = Convert.ToInt32(model.VrstaMaterijala);
+                    double potrebnaKolicinaMaterijala = Convert.ToDouble(model.KolicinaMaterijala);
+
+                    var materijal = dbPomocnik.IzvrsiProceduru<Materijal>(Konstante.StoredProcedures.DAJ_MATERIJAL_ID, new Dictionary<string, object> { { "ID", materijalId } });
+
+                    if(materijal.Kolicina < potrebnaKolicinaMaterijala)
+                    {
+                        TempData["Error"] = "Nedovoljno raspoloživog materijala!";
+                        return RedirectToAction("Index", "Home");
+                    }
+                    materijal.Kolicina -= potrebnaKolicinaMaterijala;
+
+                    dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.IZMJENI_MATERIJAL, materijal);
+                    
+                    model.VrstaMaterijala = materijal.Naziv;
                     var response = dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.DODAJ_POSAO, model);
 
                     return RedirectToAction("Index");
@@ -161,13 +178,14 @@ namespace Online_Stamparija.Controllers
             {
                 try
                 {
-                    // TODO: Add delete logic here
-                    TempData["Error"] = "Operacija nije podrzana!";
+                    var dbPomocnik = new MySqlPomocnik();
+                    dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.IZBRISI_POSAO, new Dictionary<string, object> { { "ID", id } });
                     return RedirectToAction("Index");
                 }
-                catch
+                catch(Exception ex)
                 {
-                    return View();
+                    TempData["Error"] = ex.Message;
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else
