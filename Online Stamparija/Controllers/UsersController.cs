@@ -1,4 +1,5 @@
 ﻿using Online_Stamparija.Models;
+using Online_Stamparija.Models.MenuItems;
 using OnliStam.Pomocnici;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,24 @@ namespace Online_Stamparija.Controllers
                 {
                     TempData["Error"] = ex.Message;
                 }
+
+                TempData["BocnaDugmad"] = new List<MetroItem> { 
+                    new Online_Stamparija.Models.MenuItems.MetroItem
+                    {
+                        LinkUrl = "javascript: pokaziSakrij('prosireaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')",
+                        ImageUrl = "/Images/addUser.B.png",
+                        Title="Novi Korisnik",
+                        MinimumAllowedPosition = PozicijaEnum.Radnik
+                    },
+                    new Online_Stamparija.Models.MenuItems.MetroItem
+                    {
+                        LinkUrl = "#",
+                        ImageUrl = "/Images/settings.B.png",
+                        Title="Podešavanja",
+                        MinimumAllowedPosition = PozicijaEnum.Menadzer
+                    }
+                };
+
                 return View(korisnici);
             }
             Response.StatusCode = (int)HttpStatusCode.NotFound;

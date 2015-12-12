@@ -15,17 +15,24 @@ namespace Online_Stamparija.Controllers
         {
             if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
             {
-                var dbPomocnik = new MySqlPomocnik();
-                var materijali = dbPomocnik.IzvrsiProceduru<Materijal, Materijal>(Konstante.StoredProcedures.DAJ_MATERIJALE, new Materijal());
-                if(materijali.Any(m => m.Kolicina < 10))
+                try
                 {
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.AppendLine("Sljedeći materijali će uskoro biti istrošeni:");
-                    foreach(var m in materijali.Where(m1 => m1.Kolicina < 10))
-                        sb.AppendFormat("\t{0} : {1}{2}", m.Naziv, m.Kolicina, Environment.NewLine);
-                    if(TempData["Error"] != null)
-                        TempData["Error"] += "\n\n";
-                    TempData["Error"] += sb.ToString();
+                    var dbPomocnik = new MySqlPomocnik();
+                    var materijali = dbPomocnik.IzvrsiProceduru<Materijal, Materijal>(Konstante.StoredProcedures.DAJ_MATERIJALE, new Materijal());
+                    if(materijali.Any(m => m.Kolicina < 10))
+                    {
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                        sb.AppendLine("Sljedeći materijali će uskoro biti istrošeni:");
+                        foreach(var m in materijali.Where(m1 => m1.Kolicina < 10))
+                            sb.AppendFormat("\t{0} : {1}{2}", m.Naziv, m.Kolicina, Environment.NewLine);
+                        if(TempData["Error"] != null)
+                            TempData["Error"] += "\n\n";
+                        TempData["Error"] += sb.ToString();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    TempData["Error"] = ex.Message;
                 }
             }
             return View();

@@ -59,6 +59,7 @@
     <Compile Include="Konstante.cs" />
     <Compile Include="KriptoPomocnik.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="MetroItem.cs" />
     <Compile Include="MsSqlPomocnik.cs" />
     <Compile Include="MySqlPomocnik.cs" />
     <Compile Include="MySqlUrednik.cs" />

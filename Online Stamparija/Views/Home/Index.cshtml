@@ -11,38 +11,32 @@
         <h1>Online Štamparija</h1>
     </div>
 
-
-@*@if(ViewBag.Error != null || TempData["Error"]!=null)
-{
-    <div class="alert alert-danger" style="float:left">
-        <span>@ViewBag.Error + @TempData["Error"]</span>
-    </div>
-}*@
     @Html.Partial("Upozorenja/Greska", TempData["Error"])
 
 
 
- 
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.js"></script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-   <head>
-<style>
-    .carousel-inner > .item > img,
-    .carousel-inner > .item > a > img {
-        width: 70%;
-        margin: auto;
-    }
 
-     
+    <style>
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            margin: auto;
+        }
 
-     .product{width:250px;height:250px;margin-top:50px;float:left;}
-</style>
-</head>
-<body>
+
+
+        .product {
+            width: 250px;
+            height: 250px;
+            margin-top: 50px;
+        }
+    </style>
     <div class="container">
         <br>
 
@@ -84,55 +78,49 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-    </div>
 
 
-    <div class="row container-fluid" style="margin-left:25px;" >
-       
-        <div class="row"><img src="http://www.fotofabrik.de/content/images/pdf-uploader/pdf-upload-icon.png" class="product" />
+        <div class="row container-fluid" style="margin-left:25px;">
 
-           <div style="margin-left:350px;margin-top:50px">
-            
-FSC publishes some specialized catalogues on its website from 2012 on.
-Due to numbering rights, FSC only publishes Michel, Yvert, Stanley Gibbons, Scott and other numbers for items that are on sale. A growing number of stamps also show an FSC number (no matter if the item in on sale or not). Anyone can use FSC numbers, as long as they are mentioned in any correspondence. FSC numbers can be found on www.freestampcatalogue.com
-We update the catalogue with new issues weekly.
-Freestampcatalogue is free for everyone to use.
-All new issues worldwide will be recorded (sometimes with some delay), with the exception of the issues from; Guinea Republic, Guinea-Bissau, Comores, Mozambique, Saint Thomas and Togo. These countries are banned by us for the time being in connection with the massive flood of (topical) issues with high face values, issued by an agency in Lithuania. As soon as these countries turn to more serious releases, we will record them again.</div> </div>
-          
-    </div>
+            <div class="row">
+                <img src="http://www.fotofabrik.de/content/images/pdf-uploader/pdf-upload-icon.png" class="product col-xs-12 col-sm-4" />
+
+                <div style="margin-top:50px" class=" col-xs-12 col-sm-8">
+
+                    FSC publishes some specialized catalogues on its website from 2012 on.
+                    Due to numbering rights, FSC only publishes Michel, Yvert, Stanley Gibbons, Scott and other numbers for items that are on sale. A growing number of stamps also show an FSC number (no matter if the item in on sale or not). Anyone can use FSC numbers, as long as they are mentioned in any correspondence. FSC numbers can be found on www.freestampcatalogue.com
+                    We update the catalogue with new issues weekly.
+                    Freestampcatalogue is free for everyone to use.
+                    All new issues worldwide will be recorded (sometimes with some delay), with the exception of the issues from; Guinea Republic, Guinea-Bissau, Comores, Mozambique, Saint Thomas and Togo. These countries are banned by us for the time being in connection with the massive flood of (topical) issues with high face values, issued by an agency in Lithuania. As soon as these countries turn to more serious releases, we will record them again.
+                </div>
+            </div>
+
+        </div>
 
 
-    <div class="row" style="margin-left:25px;">
-        <img src="http://novamedia.rs/data/imgs/12000/i11339_3.jpg" class="product" />
+        <div class="row" style="margin-left:25px;">
+            <img src="http://novamedia.rs/data/imgs/12000/i11339_3.jpg" class="product col-xs-12 col-sm-4" />
 
-        <div style="margin-left:350px;margin-top:50px">
-            This self-adhesive PVC film is designed for use with backlit, electric signboards. Simply apply the print to the surface of the acrylic board that covers the lights of the sign.
+            <div style="margin-top:50px" class="col-xs-12 col-sm-8">
+                This self-adhesive PVC film is designed for use with backlit, electric signboards. Simply apply the print to the surface of the acrylic board that covers the lights of the sign.
 
-            Available with your choice of matt or gloss PP finish. The white, opaque type will look good even during the day when the signboard is turned off.
-            Freestampcatalogue is free for everyone to use.
-            All new issues worldwide will be recorded (sometimes with some delay), with the exception of the issues from; Guinea Republic, Guinea-Bissau, Comores, Mozambique, Saint Thomas and Togo. These countries are banned by us for the time being in connection with the massive flood of (topical) issues with high face values, issued by an agency in Lithuania. As soon as these countries turn to more serious releases, we will record them again.
+                Available with your choice of matt or gloss PP finish. The white, opaque type will look good even during the day when the signboard is turned off.
+                Freestampcatalogue is free for everyone to use.
+                All new issues worldwide will be recorded (sometimes with some delay), with the exception of the issues from; Guinea Republic, Guinea-Bissau, Comores, Mozambique, Saint Thomas and Togo. These countries are banned by us for the time being in connection with the massive flood of (topical) issues with high face values, issued by an agency in Lithuania. As soon as these countries turn to more serious releases, we will record them again.
+            </div>
+        </div>
+
+
+        <div class="row" style="margin-left:25px;">
+            <img src="http://www.kosovalive360.com/wp-content/uploads/2015/04/library-books.jpg" class="product col-xs-12 col-sm-4" />
+
+            <div style="margin-top:50px" class="col-xs-12 col-sm-8">
+                Shows almost all stamps released between the 1920s and present.
+                FSC is a simplified catalogue, which displays just sets and souvenir sheets. No booklet, minisheets, errors or special items.
+
+                Freestampcatalogue is free for everyone to use.
+                All new issues worldwide will be recorded (sometimes with some delay), with the exception of the issues from; Guinea Republic, Guinea-Bissau, Comores, Mozambique, Saint Thomas and Togo. These countries are banned by us for the time being in connection with the massive flood of (topical) issues with high face values, issued by an agency in Lithuania. As soon as these countries turn to more serious releases, we will record them again.
+            </div>
         </div>
     </div>
-
-
-    <div class="row" style="margin-left:25px;">
-        <img src="http://www.kosovalive360.com/wp-content/uploads/2015/04/library-books.jpg" class="product" />
-
-        <div style="margin-left:350px;margin-top:50px">
-            Shows almost all stamps released between the 1920s and present.
-            FSC is a simplified catalogue, which displays just sets and souvenir sheets. No booklet, minisheets, errors or special items.
-          
-            Freestampcatalogue is free for everyone to use.
-            All new issues worldwide will be recorded (sometimes with some delay), with the exception of the issues from; Guinea Republic, Guinea-Bissau, Comores, Mozambique, Saint Thomas and Togo. These countries are banned by us for the time being in connection with the massive flood of (topical) issues with high face values, issued by an agency in Lithuania. As soon as these countries turn to more serious releases, we will record them again.
-    </div>
 </div>
-
-
-
-
-    </body>
-
- 
-   
-
-

@@ -44,7 +44,7 @@ namespace Online_Stamparija.Controllers
                 {
                     var dbPomocnik = new MySqlPomocnik();
                     model = dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.DAJ_POSAO_ID, new Dictionary<string, object> { { "ID", id } });
-                    }
+                }
                 catch(Exception ex)
                 {
                     TempData["Error"] = ex.Message;
@@ -94,7 +94,7 @@ namespace Online_Stamparija.Controllers
                     materijal.Kolicina -= potrebnaKolicinaMaterijala;
 
                     dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.IZMJENI_MATERIJAL, materijal);
-                    
+
                     model.VrstaMaterijala = materijal.Naziv;
                     var response = dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.DODAJ_POSAO, model);
 
@@ -192,6 +192,17 @@ namespace Online_Stamparija.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        class DajPosloveModel { public int poc { get; set; } public int kra { get; set; } }
+
+        [HttpGet]
+        public List<Posao> DajPoslove(int pocIndeks, int broj)
+        {
+            var dbPomocnik = new MySqlPomocnik();
+            var poslovi = dbPomocnik.IzvrsiProceduru<DajPosloveModel, Posao>(new SqlUpit("n", "SELECT * FROM poslovi LIMIT @poc, @kra", new List<string>{"poc", "kra"}),
+                new DajPosloveModel{ poc = pocIndeks, kra = pocIndeks + broj });
+            return poslovi;
         }
     }
 }

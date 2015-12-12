@@ -10,13 +10,19 @@
 </head>
 <body>
     @Html.Partial("Trake/Vrh")
-
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Online Stamparija</p>
-        </footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Online Stamparija</p>
+                </footer>
+            </div>
+            <div class="col-xs-2">
+                @Html.Partial("Trake/Bok")
+            </div>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

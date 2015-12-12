@@ -1,52 +1,73 @@
-﻿<div class="row navbar-fixed-top navbar-inverse">
-    <div class="metrobutton hidden-xs col-sm-1">
-        <a href="@Url.Action("Index", "Home")">
-            <img src="~/Images/home.B.png" title="Početna stranica" />
-        </a>
+﻿<div class="container">
+    <div class="row navbar-fixed-top navbar-inverse">
+        <div class="row">
+            @foreach(var dugme in Online_Stamparija.StandardniUiElementi.glavnaDugmad)
+            {
+                if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Logovan && Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija <= (int)dugme.MinimumAllowedPosition)
+                {
+                    <div class="metroButton hidden-xs col-sm-1">
+                        <a href="@dugme.LinkUrl">
+                            <img src="@dugme.ImageUrl" title="@dugme.Title" />
+                        </a>
+                    </div>
+                }
+            }
+            @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName != null)
+            {
+                <div class="hidden-xs col pull-right">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3 style="color:white">Dobro došao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Logout", "Account")">
+                                    <img src="~/Images/logout.B.png" title="Logout" />
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-xs-12 hidden-lg hidden-md hidden-sm">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <h3 style="color:white">&nbsp;&nbsp;Dobro došao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3>
+                        </div>
+                        <div class="col-xs-4 pull-right">
+                            <a href="@Url.Action("Logout", "Account")">
+                                <img src="~/Images/logout.B.png" title="Logout" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="hidden-xs col-sm-5 pull-right">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h3 style="color:white">Dobro došao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3>
+                            </div>
+                            <div class="metroButton col-sm-3">
+                                <a href="@Url.Action("Logout", "Account")">
+                                    <img src="~/Images/logout.B.png" title="Logout" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <h3 style="color:white">Dobro došao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3>
+                            </div>
+                            <div class="metroButton col-xs-4 pull-right">
+                                <a href="@Url.Action("Logout", "Account")">
+                                    <img src="~/Images/logout.B.png" title="Logout" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>*@
+            }
+        </div>
     </div>
-    <div class="metroButton hidden-xs col-sm-1">
-        <a href="@Url.Action("About", "Home")">
-            <img src="~/Images/about.png" title="O nama" />
-        </a>
-    </div>
-    <div class="metroButton hidden-xs col-sm-1">
-        <a href="@Url.Action("Contact", "Home")">
-            <img src="~/Images/contacts.B.png" title="Kontakti" />
-        </a>
-    </div>
-    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1)
-    {
-        <div class="metroButton hidden-xs col-sm-1">
-            <a href="@Url.Action("Index", "Users")">
-                <img src="~/Images/settings1.B.png" title="Administrativna ploča" />
-            </a>
-        </div>
-    }
-    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
-    {
-        <div class="metroButton hidden-xs col-sm-1">
-            <a href="@Url.Action("Index", "Posao")">
-                <img src="~/Images/posao.B.png" title="Poslovi" />
-            </a>
-        </div>
-    }
-    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
-    {
-        <div class="metroButton hidden-xs col-sm-1">
-            <a href="@Url.Action("Index", "Materijali")">
-                <img src="~/Images/materijali.png" title="Materijali" />
-            </a>
-        </div>
-    }
-    @if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName != null)
-    {
-        <div class="metroButton col-xs-3 col-sm-1 pull-right">
-            <a href="@Url.Action("Logout", "Account")">
-                <img src="~/Images/logout.B.png" title="Logout" />
-            </a>
-        </div>
-        <h3 style="color:white" class="col-xs pull-right">Dobro dosao @Online_Stamparija.Models.LogovaniKorisnik.Instanca.UserName</h3>
-    }
 </div>
 
 @*">

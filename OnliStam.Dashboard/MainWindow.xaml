@@ -5,7 +5,7 @@
         xmlns:enums="clr-namespace:OnliStam.Dashboard.Enums"
         xmlns:converters="clr-namespace:OnliStam.Dashboard.Converters"
       xmlns:views="clr-namespace:OnliStam.Dashboard.View"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+        Title="MainWindow" Height="350" Width="277.85" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="ListItem">
 
