@@ -1,0 +1,36 @@
+﻿@model Online_Stamparija.Models.Posao
+
+
+<style type="text/css">
+</style>
+
+<div class="okvir header">
+
+    <h4 class="header"> @Model.ID &nbsp;
+        @Html.DisplayFor(model => model.Naziv)
+    </h4>
+    <hr />
+
+    <table class="footer floatRight">
+        <tr>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Edit", new { id = Model.ID })">
+                    <img src="/Images/olovka.png" alt="olovka" class="iconButton" />
+                    <span>Uredi</span>
+                </a>
+            </td>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Delete", new { id = Model.ID })">
+                    <img src="~/Images/appbar.delete.png" alt="at" class="iconButton" />
+                    <span>Obriši</span>
+                </a>
+            </td>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Details", new { id = Model.ID })">
+                    <img src="~/Images/about.C.png" alt="at" class="iconButton" />
+                    <span>Detalji</span>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>

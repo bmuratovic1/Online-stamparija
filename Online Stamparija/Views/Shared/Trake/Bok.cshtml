@@ -1,34 +1,6 @@
 ﻿<div class="desniBar" id="obicnaDesnaTraka">
     @*<ul>  @*class="nav navbar-nav">*@
     <table>
-        @foreach(var dugme in Online_Stamparija.StandardniUiElementi.glavnaDugmad)
-        {
-            if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija <= (int)dugme.MinimumAllowedPosition)
-            {
-                @*<li>*@
-                <tr>
-                    <td>
-                        <div class="metroButton hidden-sm hidden-md hidden-lg">
-                            <a href="@dugme.LinkUrl" class="right">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <img src="@dugme.ImageUrl" />
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <span>@dugme.Title</span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
-                @*</li>*@
-            }
-        }
         @if(TempData.ContainsKey("BocnaDugmad"))
         {
             foreach(var dugme in TempData["BocnaDugmad"] as List<Online_Stamparija.Models.MenuItems.MetroItem>)
@@ -58,6 +30,35 @@
                     </tr>
                     @*</li>*@
                 }
+            }
+            <tr><td><hr class="hidden-sm hidden-md hidden-lg" /></td></tr>
+        }
+        @foreach(var dugme in Online_Stamparija.StandardniUiElementi.glavnaDugmad)
+        {
+            if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija <= (int)dugme.MinimumAllowedPosition)
+            {
+                @*<li>*@
+                <tr>
+                    <td>
+                        <div class="metroButton hidden-sm hidden-md hidden-lg">
+                            <a href="@dugme.LinkUrl" class="right">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <img src="@dugme.ImageUrl" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <span>@dugme.Title</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                @*</li>*@
             }
         }
     </table>

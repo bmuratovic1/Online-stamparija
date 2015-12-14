@@ -111,6 +111,7 @@ textarea {
     vertical-align: middle;
     overflow-wrap:break-word;
     z-index: 1;
+    overflow-y:auto;
 }
 .desniBar td{
     padding:0;
@@ -227,7 +228,7 @@ textarea {
     }
 
 .okvir {
-    width: 350px;
+    min-width: 250px;
     border: 3px solid black;
     margin: 25px;
     padding: 15px 15px 0 15px;

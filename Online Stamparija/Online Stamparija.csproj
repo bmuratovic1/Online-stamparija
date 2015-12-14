@@ -156,12 +156,15 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\addUser.B.png" />
+    <Content Include="Images\appbar.brick.png" />
+    <Content Include="Images\appbar.delete.png" />
     <Content Include="Images\appbar.os.android.png" />
     <Content Include="Images\appbar.os.windows.8.png" />
     <Content Include="Images\appbar.scrabble.a.png" />
     <Content Include="Images\appbar.scrabble.m.png" />
     <Content Include="Images\appbar.scrabble.r.png" />
     <Content Include="Images\appbar.shield.png" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Images\materijali.png" />
     <Content Include="Images\posao.B.png" />
     <Content Include="Images\at.png" />
@@ -229,6 +232,7 @@
     <Content Include="Views\Materijali\Obrisi.cshtml" />
     <Content Include="Views\Materijali\Uredi.cshtml" />
     <Content Include="Views\Shared\MenuItems\Dugmad\MetroButton.cshtml" />
+    <Content Include="Views\Shared\Posao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

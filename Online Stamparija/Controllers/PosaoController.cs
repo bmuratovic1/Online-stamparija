@@ -1,7 +1,9 @@
 ﻿using Online_Stamparija.Models;
+using Online_Stamparija.Models.MenuItems;
 using OnliStam.Pomocnici;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Online_Stamparija.Controllers
@@ -26,6 +28,15 @@ namespace Online_Stamparija.Controllers
                 {
                     TempData["Error"] = ex.Message;
                 }
+
+                TempData["BocnaDugmad"] = new List<MetroItem> { 
+                    new Online_Stamparija.Models.MenuItems.MetroItem
+                    {
+                        LinkUrl = "/Posao/Create",
+                        ImageUrl = "/Images/addUser.B.png",
+                        Title="Novi Korisnik",
+                        MinimumAllowedPosition = PozicijaEnum.Radnik
+                    }};
                 return View(poslovi);
             }
             else
@@ -197,12 +208,29 @@ namespace Online_Stamparija.Controllers
         class DajPosloveModel { public int poc { get; set; } public int kra { get; set; } }
 
         [HttpGet]
-        public List<Posao> DajPoslove(int pocIndeks, int broj)
+        public ActionResult DajPosaoPartialView(int posaoId)
         {
+            try
+            {
+                var dbPomocnik = new MySqlPomocnik();
+                var posao = dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.DAJ_POSAO_ID, new Dictionary<string, object> { { "ID", posaoId } });
+                return PartialView("Posao", posao);
+            }
+            catch(Exception ex)
+            {
+                return PartialView("Error", ex.Message);
+            }
+        }
+
+        [HttpGet]
+        public string DajPosloveId(int pocIndeks, int brojPoslova)
+        {
+            var response = new List<ActionResult>();
             var dbPomocnik = new MySqlPomocnik();
-            var poslovi = dbPomocnik.IzvrsiProceduru<DajPosloveModel, Posao>(new SqlUpit("n", "SELECT * FROM poslovi LIMIT @poc, @kra", new List<string>{"poc", "kra"}),
-                new DajPosloveModel{ poc = pocIndeks, kra = pocIndeks + broj });
-            return poslovi;
+            var posaoIds = dbPomocnik.IzvrsiProceduru<DajPosloveModel, Posao>(new SqlUpit("", "SELECT ID FROM poslovi LIMIT @poc, @kra", new List<string> { "poc", "kra" }),
+                new DajPosloveModel { poc = pocIndeks, kra = brojPoslova });
+
+            return string.Join(";", posaoIds.Select(posao => posao.ID).ToList());
         }
     }
 }

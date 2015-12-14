@@ -150,6 +150,8 @@ namespace Online_Stamparija.Models
         {
             get
             {
+
+                HttpContext.Current.Session["sesija"] = _instanca;
                 return !string.IsNullOrEmpty(UserName);
             }
         }
