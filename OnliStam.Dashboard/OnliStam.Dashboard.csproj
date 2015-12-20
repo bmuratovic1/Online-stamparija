@@ -54,6 +54,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Enums\MySqlKljucevi.cs" />
+    <Compile Include="View\Label.cs" />
+    <Compile Include="View\SqlKveri.xaml.cs">
+      <DependentUpon>SqlKveri.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\UCNovaTabela.xaml.cs">
       <DependentUpon>UCNovaTabela.xaml</DependentUpon>
     </Compile>
@@ -73,6 +77,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\SqlKveri.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\UCNovaTabela.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +130,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\table.new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sql.execute.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

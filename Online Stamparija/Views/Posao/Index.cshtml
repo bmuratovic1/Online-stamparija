@@ -5,11 +5,14 @@
 }
 @Html.Partial("Upozorenja/Greska", (TempData["Error"] ?? "").ToString())
 
-<h3>Poslovi</h3>
-
-<p>
-    @Html.ActionLink("+ Novi posao", "Create")
-</p>
+<hr />
+<table>
+    <tr>
+        <td>
+            <h2>Poslovi</h2>
+        </td>
+    </tr>
+</table>
 
 <div id="poslovi"></div>
 <div id="dodavanjePosla" style="visibility:hidden">
@@ -28,7 +31,7 @@
 
     function UcitajPoslove() {
         var a = (document.body.scrollTop + window.innerHeight);
-        if (screen.height > posloviDiv.scrollHeight || document.body.scrollHeight == a ) {
+        if (screen.height > posloviDiv.scrollHeight || document.body.scrollHeight == a) {
             document.getElementById('dodavanjePosla').style.visibility = 'visible';
             document.body.style.cursor = 'progress';
             var xhttp = new XMLHttpRequest();

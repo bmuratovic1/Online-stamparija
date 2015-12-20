@@ -8,6 +8,9 @@
                     <div class="metroButton hidden-xs col-sm-1">
                         <a href="@dugme.LinkUrl">
                             <img src="@dugme.ImageUrl" title="@dugme.Title" />
+                            @if(dugme.Upozorenje){
+                                <img src="~/Images/u1.png" style="position:absolute; right:0; bottom:0; width:32px; height:32px"/>
+                            }
                         </a>
                     </div>
                 }

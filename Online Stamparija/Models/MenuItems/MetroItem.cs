@@ -10,5 +10,8 @@ namespace Online_Stamparija.Models.MenuItems
         public string Title { get; set; }
 
         public PozicijaEnum MinimumAllowedPosition { get; set; }
+
+        public bool Upozorenje { get; set; }
+
     }
 }

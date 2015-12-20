@@ -142,6 +142,8 @@
     <Compile Include="Models\LogovaniKorisnik.cs" />
     <Compile Include="Models\Materijal.cs" />
     <Compile Include="Models\MenuItems\MetroItem.cs" />
+    <Compile Include="Models\OPP\DodavanjeMaterijala.cs" />
+    <Compile Include="Models\OPP\MaterijaliPosao.cs" />
     <Compile Include="Models\Posao.cs" />
     <Compile Include="Models\PozicijaEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -156,6 +158,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\addUser.B.png" />
+    <Content Include="Images\appbar.add.png" />
     <Content Include="Images\appbar.brick.png" />
     <Content Include="Images\appbar.delete.png" />
     <Content Include="Images\appbar.os.android.png" />
@@ -164,8 +167,10 @@
     <Content Include="Images\appbar.scrabble.m.png" />
     <Content Include="Images\appbar.scrabble.r.png" />
     <Content Include="Images\appbar.shield.png" />
+    <Content Include="Images\left.C.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\materijali.png" />
+    <Content Include="Images\novi.posao.B.png" />
     <Content Include="Images\posao.B.png" />
     <Content Include="Images\at.png" />
     <Content Include="Images\basecircle.png" />
@@ -233,6 +238,7 @@
     <Content Include="Views\Materijali\Uredi.cshtml" />
     <Content Include="Views\Shared\MenuItems\Dugmad\MetroButton.cshtml" />
     <Content Include="Views\Shared\Posao.cshtml" />
+    <Content Include="Views\Shared\Materijal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

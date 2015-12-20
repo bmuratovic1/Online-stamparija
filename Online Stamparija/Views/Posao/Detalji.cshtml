@@ -4,63 +4,218 @@
     ViewBag.Title = "Detalji";
 }
 
-<h2>Detalji</h2>
+<script type="text/javascript">
 
-<div>
-    <h4>Posao</h4>
+</script>
+
+<div class="desniBarSiroki" id="prosireaDesnaTraka" style="display:none" onload="javascript:UcitajSveMaterijale();">
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VrijemeTrajanja)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VrijemeTrajanja)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.VrstaMaterijala)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.VrstaMaterijala)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.KolicinaMaterijala)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.KolicinaMaterijala)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
+    <ul>
+        <li>
+            <h3>
+                <a href="javascript: pokaziSakrij('prosireaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')">
+                    <img src="~/Images/lef.B.png" class="iconButtonBijeli mali" />
+                    <span>Nazad</span>
+                </a>
+            </h3>
+        </li>
+        <li>
+            <div id="noviKorisnik">
+                <ul>
+                    <li>
+                        <h4>Novi materijal</h4>
+                    </li>
+                    <li>
+                        <label>Materijal</label>
+                    </li>
+                    <li>
+                        <select class="form-control text-box single-line valid" name="VrstaMaterijala" id="vrstaMaterijala"></select>
+                    </li>
+                    <li>
+                        <label>Količina</label>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control text-box single-line valid" name="KolicinaMaterijala" id="kolicinaMaterijala" />
+                    </li>
+                    <li><label style="color:red" id="lblErrorMessage"></label></li>
+                    <li><input type="button" value="Dodaj" onclick="DodajMaterijal()" /></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<hr />
+<table>
+    <tr>
+        <td class="sirokaKolona">
+            <a href="@Url.Action("Index")">
+                <img src="~/Images/left.C.png" alt="olovka" class="iconButton" title="Nazad" />
+            </a>
+        </td>
+        <td>
+            <h2>Detalji</h2>
+        </td>
+    </tr>
+</table>
+
+<div class="okvir siroki header">
+    <div class="container">
+        <div class="header row">
+            <h3 class="col-xs-8 col-sm-6">
+                @Html.DisplayFor(model => model.Naziv)
+            </h3>
+            <div class="col-xs-4 col-sm-6">
+                <h3 class="pull-right">
+                    @Html.DisplayFor(model => model.Status)
+                </h3>
+            </div>
+        </div>
+    </div>
+    <hr />
+
+    @*<h4>Opis</h4>*@
+    @Html.DisplayFor(model => model.Opis)
+    <hr />
+    <h4>Materijali</h4>
+    <p id="materijali" style="max-height:30%; overflow-y:auto;">
+
+    </p>
+
+    <table class="footer floatRight">
+        <tr>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Edit", new { id = Model.ID })">
+                    <img src="/Images/olovka.png" alt="olovka" class="iconButton" />
+                    <span>Uredi</span>
+                </a>
+            </td>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Delete", new { id = Model.ID })">
+                    <img src="~/Images/appbar.delete.png" alt="at" class="iconButton" />
+                    <span>Obriši</span>
+                </a>
+            </td>
+            @*<td class="sirokaKolona">
+                <a href="@Url.Action("Details", new { id = Model.ID })">
+                    <img src="~/Images/about.C.png" alt="at" class="iconButton" />
+                    <span>Detalji</span>
+                </a>
+            </td>*@
+        </tr>
+    </table>
+</div>
+
+
+<script>
+    var materijaliDiv = document.getElementById("materijali");
+    var ucitavanjeMaterijala = true;
+
+    materijaliDiv.onscroll = function () { UcitajPoslove() };
+
+    if (materijaliDiv.scrollHeight < 30) {
+        UcitajMaterijale();
+    }
+
+    UcitajSveMaterijale();
+
+    function UcitajMaterijale() {
+        if (ucitavanjeMaterijala == true) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                    if (xhttp.responseText == '') {
+                        return;
+                    }
+                    materijaliDiv.innerHTML = xhttp.responseText;
+
+                    //var ids = xhttp.responseText.split(';');
+                    //for (var i = 0; i < ids.length; i = i + 1) {
+                    //    UcitajMaterijal(ids[i]);
+                    //}
+                }
+            };
+            xhttp.open("GET", "/Materijali/DajMaterijaleZaPosao?posaoId=" + @Model.ID, true);
+            xhttp.send();
+        } else {
+            return;
+        }
+    }
+
+    function UcitajMaterijal(materijalId) {
+        var client = new XMLHttpRequest();
+        client.onreadystatechange = function () {
+            if (client.readyState == 4 && client.status == 200) {
+                materijaliDiv.innerHTML = materijaliDiv.innerHTML + client.responseText;
+            }
+        };
+        client.open("GET", "/Materijali/DajMaterijalPartialView?materijalId=" + materijalId, true);
+        client.send();
+    }
+
+    function UcitajSveMaterijale(){
+        var vrsteMaterijalaDiv = document.getElementById('vrstaMaterijala');
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+
+                if (xhttp.responseText == '') {
+                    return;
+                }
+                var materijali = JSON.parse( xhttp.responseText );
+                for (var i = 0; i < materijali.length; i = i + 1) {
+                    var opt = document.createElement('option');
+                    opt.value = materijali[i].ID;
+                    opt.innerHTML = materijali[i].Naziv;
+                    vrsteMaterijalaDiv.appendChild(opt);
+                }
+            }
+        };
+        xhttp.open("GET", "/Materijali/DajSvejson", true);
+        xhttp.send();
+    }
+
+    function DodajMaterijal(){
+        var lblErrorMessage = document.getElementById("lblErrorMessage");
+        lblErrorMessage.Value = '';
+
+        var selVrstaMaterijala = document.getElementById('vrstaMaterijala');
+
+        var vrstaMaterijala = selVrstaMaterijala.selectedOptions[0].textContent;
+        var materijalId = selVrstaMaterijala.selectedOptions[0].value;
+        var kolicinaMaterijala = document.getElementById('kolicinaMaterijala').value;
+        var noviMaterijal =  {
+            Naziv:'@Model.Naziv',
+            Opis:'@Model.Opis',
+            Status:'@Model.Status',
+            VrijemeTrajanja:'@Model.VrijemeTrajanja',
+            VrstaMaterijala:vrstaMaterijala,
+            MaterijalId:materijalId,
+            KolicinaMaterijala: kolicinaMaterijala
+        };
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState == 4 && xhttp.status == 200) {
+                var odgovor = JSON.parse( xhttp.responseText );
+                if (odgovor.Error === undefined) {
+                    if(odgovor.Status !== undefined){
+                        if(odgovor.Status == 'Uspjesno'){
+                            materijaliDiv.innerHTML = '';
+                            UcitajMaterijale();
+                        }else{
+                            lblErrorMessage.textContent = 'Neuspjesno dodavanje materijala!';
+                            alert('Neuspjesno dodavanje materijala!');
+                        }
+                    }
+                }else{
+                    lblErrorMessage.textContent = odgovor.Error;
+                }
+            }
+        };
+        xhttp.open("POST", "/Posao/CreateJson", true);
+        xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhttp.send(JSON.stringify(noviMaterijal));
+    }
+</script>

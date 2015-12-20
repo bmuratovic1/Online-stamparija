@@ -17,6 +17,8 @@ namespace Online_Stamparija.Models
 
         public string VrstaMaterijala { get; set; }
 
+        public int MaterijalId { get; set; }
+
         public string KolicinaMaterijala { get; set; }
 
         public int Status { get; set; }

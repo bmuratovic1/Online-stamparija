@@ -3,40 +3,52 @@
 @{
     ViewBag.Title = "Details";
 }
+<hr />
+<table>
+    <tr>
+        <td class="sirokaKolona">
+            <a href="@Url.Action("Index")">
+                <img src="~/Images/left.C.png" alt="nazad" class="iconButton" title="Nazad" />
+            </a>
+        </td>
+        <td>
+            <h2>Detalji</h2>
+        </td>
+    </tr>
+</table>
 
-<h2>Details</h2>
 
-<div>
-    <h4>Materijal</h4>
+<div class="okvir siroki header">
+    <div class="container">
+        <div class="header row">
+            <h3 class="col-xs-8 col-sm-6">
+                @Html.DisplayFor(model => model.Naziv)
+            </h3>
+            <div class="col-xs-4 col-sm-6">
+                <h3 class="pull-right">
+                    @Html.DisplayFor(model => model.Kolicina)
+                </h3>
+            </div>
+        </div>
+    </div>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Opis)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Opis)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Kolicina)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kolicina)
-        </dd>
-
-    </dl>
+    <p>
+        @Html.DisplayFor(model => model.Opis)
+    </p>
+    <table class="footer floatRight">
+        <tr>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Edit", new { id = Model.ID })">
+                    <img src="/Images/olovka.png" alt="olovka" class="iconButton" />
+                    <span>Uredi</span>
+                </a>
+            </td>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Delete", new { id = Model.ID })">
+                    <img src="~/Images/appbar.delete.png" alt="at" class="iconButton" />
+                    <span>Obriši</span>
+                </a>
+            </td>
+        </tr>
+    </table>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

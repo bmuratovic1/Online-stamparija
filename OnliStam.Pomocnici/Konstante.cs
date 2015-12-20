@@ -53,27 +53,31 @@ WHERE ID = @ID",
     VrijemeTrajanja,
     VrstaMaterijala,
     KolicinaMaterijala,
-    Status
+    Status,
+    MaterijalId
 )VALUES(
     @Naziv,
     @Opis,
     @VrijemeTrajanja,
     @VrstaMaterijala,
     @KolicinaMaterijala,
-    @Status
+    @Status,
+    @MaterijalId
 );",
-                new List<string> { "Naziv", "Opis", "VrijemeTrajanja", "VrstaMaterijala", "KolicinaMaterijala", "Status" });
+                new List<string> { "Naziv", "Opis", "VrijemeTrajanja", "VrstaMaterijala", "KolicinaMaterijala", "Status", "MaterijalId" });
 
             public static readonly SqlUpit DAJ_ZAVRSENE_POSLOVE = new SqlUpit("DajZavrsenePoslove",
 @"SELECT *
 FROM poslovi
-WHERE Status = 1",
+WHERE Status = 1
+ORDER BY ID DESC",
                   new List<string>());
 
             public static readonly SqlUpit DAJ_NEZAVRSENE_POSLOVE = new SqlUpit("DajNezavrsenePoslove",
 @"SELECT *
 FROM poslovi
-WHERE Status <> 1",
+WHERE Status <> 1
+ORDER BY ID DESC",
                   new List<string>());
 
             public static readonly SqlUpit IZBRISI_POSAO = new SqlUpit("IzbrisiPosao",
@@ -147,11 +151,11 @@ VALUES(
             public static readonly SqlUpit DAJ_STAMPU = "DajStampu";
             public static readonly SqlUpit POTVRDI_POSAO = "PotvrdiPosao";
             public static readonly SqlUpit DAJ_PODATKE_ZA_GRAF = "DajPodatkeZaGraf_1";
-            public static readonly SqlUpit DAJ_MATERIJAL_ID = new SqlUpit("DajMaterijal_ID", 
+            public static readonly SqlUpit DAJ_MATERIJAL_ID = new SqlUpit("DajMaterijal_ID",
                 @"SELECT *
                 FROM materijali
                 WHERE ID = @ID;",
-                                 new List<string>{"ID"});
+                                 new List<string> { "ID" });
             public static readonly SqlUpit DAJ_MATERIJALE = new SqlUpit("DajMaterijale",
                 @"SELECT * FROM materijali", new List<string>());
             public static SqlUpit DODAJ_MATERIJAL = new SqlUpit("DodajMaterijale",
@@ -174,6 +178,24 @@ WHERE ID = @ID;", new List<string> { "ID", "Naziv", "Opis", "Kolicina" });
 
             public static readonly SqlUpit IZBRISI_MATERIJAL = new SqlUpit("IzbrisiMaterijal",
                 @"DELETE FROM materijali WHERE ID = @ID", new List<string> { "ID" });
+
+            public static readonly SqlUpit DAJ_POSLOVE_ID = new SqlUpit("",
+                @"SELECT MIN(ID) as ID 
+                FROM poslovi 
+                GROUP BY Naziv 
+                ORDER BY 1 DESC 
+                LIMIT @poc, @kra",
+                                 new List<string> { "poc", "kra" }
+                                 );
+
+            public static readonly SqlUpit DAJ_MATERIJALE_ZA_POSAO = new SqlUpit("",
+                @"SELECT m.ID, m.Naziv, m.Opis, p2.KolicinaMaterijala as Kolicina
+                FROM poslovi p1
+                INNER JOIN poslovi p2 ON p1.naziv = p2.naziv
+                INNER JOIN Materijali m on m.ID = p2.materijalId
+                WHERE p1.ID = @PosaoId",
+                                                             new List<string> { "PosaoId"}
+                );
         }
 
         public struct EMailTemplates

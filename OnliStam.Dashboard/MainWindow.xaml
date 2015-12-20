@@ -5,7 +5,11 @@
         xmlns:enums="clr-namespace:OnliStam.Dashboard.Enums"
         xmlns:converters="clr-namespace:OnliStam.Dashboard.Converters"
       xmlns:views="clr-namespace:OnliStam.Dashboard.View"
+        xmlns:local="clr-namespace:OnliStam.Dashboard"
         Title="MainWindow" Height="350" Width="277.85" Loaded="Window_Loaded">
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static local:MainWindow.MyCommand}" Executed="MyCommandExecuted"/>
+    </Window.CommandBindings>
     <Window.Resources>
         <Style TargetType="ListItem">
 
@@ -47,7 +51,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" MaxWidth="256"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -60,6 +64,7 @@
         <Grid Grid.Row="1" Grid.Column="0" Name="ListaTabela" Style="{StaticResource PostojecaTabela}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -82,18 +87,28 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <Button Grid.Row="1" HorizontalAlignment="Left" Click="Button_Click">
+            <Button Grid.Row="1" Click="Button_Click">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                     <Image Source="Images/table.new.png" Width="25"/>
                     <Label>Nova tabela</Label>
                 </StackPanel>
+            </Button>
+            <Button Grid.Row="2" Click="Btn_SqlKveri_Click">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="Images/sql.execute.png" Width="25"/>
+                    <TextBlock Grid.Column="1" Margin="15,0">SQL kveri</TextBlock>
+                </Grid>
             </Button>
         </Grid>
 
         <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource NovaTabela}">
             <views:UCNovaTabela x:Name="UcNovaTabela" />
         </DockPanel>
-        
+
         <GridSplitter Grid.Column="1" Grid.Row="1" Width="5" HorizontalAlignment="Stretch"/>
 
         <Grid Grid.Row="1" Grid.Column="2" Name="DefinicijaTabele" Margin="7" Style="{StaticResource PostojecaTabela}">

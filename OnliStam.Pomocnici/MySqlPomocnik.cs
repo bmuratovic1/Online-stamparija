@@ -153,6 +153,23 @@ namespace OnliStam.Pomocnici
             return odgovor;
         }
 
+
+        public List<T1> DajKolekciju<T1>(SqlUpit imeProcedure, Dictionary<string, object> parametri) where T1: new()
+        {
+            //var properties = model.GetType().GetProperties();
+            List<T1> odgovor = new List<T1>();
+
+            var tbl = IzvrsiProceduru(imeProcedure, parametri);
+
+            foreach(System.Data.DataRow red in tbl.Rows)
+            {
+                T1 cvor = RowToModel<T1>(red);
+                odgovor.Add(cvor);
+            }
+
+            return odgovor;
+        }
+
         public System.Data.DataSet IzvrsiStoredProceduru(SqlUpit imeProcedure, Dictionary<string, object> parametri)
         {
             throw new NotImplementedException();

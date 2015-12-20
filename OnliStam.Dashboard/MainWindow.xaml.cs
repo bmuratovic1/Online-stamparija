@@ -1,4 +1,5 @@
 ﻿using OnliStam.Dashboard.Model;
+using OnliStam.Dashboard.View;
 using OnliStam.Pomocnici;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace OnliStam.Dashboard
     /// </summary>
     public partial class MainWindow: Window, INotifyPropertyChanged
     {
+        public static RoutedCommand MyCommand = new RoutedCommand();
+
         /// <summary>
         /// 
         /// </summary>
@@ -38,9 +41,16 @@ namespace OnliStam.Dashboard
 
             foreach(var db in KonfiguracioniPomocnik.DajBaze())
                 cmbSqlServer.Items.Add(db);
+
+            MyCommand.InputGestures.Add(new KeyGesture(Key.R, ModifierKeys.Control));
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        private void MyCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            Btn_SqlKveri_Click(sender, e);
+        }
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -51,7 +61,14 @@ namespace OnliStam.Dashboard
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _glavniModel.UcitajTabele();
+            try
+            {
+                _glavniModel.UcitajTabele();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -81,6 +98,12 @@ namespace OnliStam.Dashboard
                 Kolone = new System.Collections.ObjectModel.ObservableCollection<Kolona>(),
                 Ime = "Neka tabela"
             }; // _glavniModel.SelectedItem;
+        }
+
+
+        private void Btn_SqlKveri_Click(object sender, RoutedEventArgs e)
+        {
+            new Window { Content = new SqlKveri() }.ShowDialog();
         }
     }
 }

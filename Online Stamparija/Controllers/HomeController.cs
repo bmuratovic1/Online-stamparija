@@ -28,6 +28,11 @@ namespace Online_Stamparija.Controllers
                         if(TempData["Error"] != null)
                             TempData["Error"] += "\n\n";
                         TempData["Error"] += sb.ToString();
+                        StandardniUiElementi.glavnaDugmad.FirstOrDefault(x => x.ImageUrl == "/Images/appbar.brick.png").Upozorenje = true;
+                    }
+                    else
+                    {
+                        StandardniUiElementi.glavnaDugmad.FirstOrDefault(x => x.ImageUrl == "/Images/appbar.brick.png").Upozorenje = false;
                     }
                 }
                 catch(Exception ex)
