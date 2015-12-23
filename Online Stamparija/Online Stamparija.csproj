@@ -239,6 +239,7 @@
     <Content Include="Views\Shared\MenuItems\Dugmad\MetroButton.cshtml" />
     <Content Include="Views\Shared\Posao.cshtml" />
     <Content Include="Views\Shared\Materijal.cshtml" />
+    <Content Include="Views\Shared\UserProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
