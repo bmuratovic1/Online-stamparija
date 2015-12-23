@@ -167,6 +167,9 @@ namespace Online_Stamparija.Controllers
             }
         }
 
+
+        public ActionResult UserProfile() { return View("UserProfile"); }
+
         #endregion
 
     }
