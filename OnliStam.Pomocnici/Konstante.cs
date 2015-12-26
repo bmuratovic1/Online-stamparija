@@ -10,7 +10,12 @@ namespace OnliStam.Pomocnici
     {
         public class StoredProcedures
         {
-            public static readonly SqlUpit DAJ_KORISNIKA_ID = new SqlUpit("DajKorisnika_ID", "", new List<string> { "@korisnikId" });
+            public static readonly SqlUpit DAJ_KORISNIKA_ID = new SqlUpit("DajKorisnika_ID",
+    @"SELECT * 
+	FROM korisnici
+	WHERE
+		ID = @ID
+        AND Aktivan=1", new List<string> { "ID" });
 
             public static readonly SqlUpit DAJ_KORISNIKA_EMAIL = "DajKorisnika_Email";
 
@@ -63,7 +68,8 @@ WHERE ID = @ID",
     @KolicinaMaterijala,
     @Status,
     @MaterijalId
-);",
+);
+SELECT LAST_INSERT_ID() as ID;",
                 new List<string> { "Naziv", "Opis", "VrijemeTrajanja", "VrstaMaterijala", "KolicinaMaterijala", "Status", "MaterijalId" });
 
             public static readonly SqlUpit DAJ_ZAVRSENE_POSLOVE = new SqlUpit("DajZavrsenePoslove",

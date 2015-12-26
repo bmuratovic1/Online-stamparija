@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+//using System.Net;
+//using System.Net.Http;
 
 namespace Online_Stamparija.Controllers
 {
@@ -32,7 +34,7 @@ namespace Online_Stamparija.Controllers
                 TempData["BocnaDugmad"] = new List<MetroItem> { 
                     new Online_Stamparija.Models.MenuItems.MetroItem
                     {
-                        LinkUrl = "/Posao/Create",
+                        LinkUrl = "javascript: pokaziSakrij('prosirenaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')",
                         ImageUrl = "/Images/novi.posao.B.png",
                         Title="Novi Posao",
                         MinimumAllowedPosition = PozicijaEnum.Radnik

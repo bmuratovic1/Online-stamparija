@@ -6,8 +6,10 @@
 <div class="okvir header">
 
     <h4 class="header">
-        @Html.DisplayFor(model => model.Ime)&nbsp;
-        @Html.DisplayFor(model => model.Prezime)
+        <a href="@Url.Action("Details", new { ID = Model.ID })">
+            @Html.DisplayFor(model => model.Ime)&nbsp;
+            @Html.DisplayFor(model => model.Prezime)
+        </a>
     </h4>
     @*<span class="floatRight">*@
     @switch(Model.Pozicija)

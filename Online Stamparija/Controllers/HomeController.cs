@@ -3,6 +3,7 @@ using OnliStam.Pomocnici;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -61,6 +62,20 @@ namespace Online_Stamparija.Controllers
         {
             ViewBag.Message = "Enter your e-mail address:";
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult GetMessageView(string message, string tip="obavjest")
+        {
+            switch(tip)
+            {
+                case "obavjest":
+                    return PartialView("Upozorenja/Obavjest", message);
+                case "greska":
+                    return PartialView("Upozorenja/Greska", message);
+                default:
+                    return PartialView("Error", message);
+            }
         }
     }
 }

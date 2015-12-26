@@ -261,8 +261,9 @@ textarea {
         min-width: 128px;
         margin: 5px;
     }
-    .okvir.upozorenje1{
-        border-color:red;
+
+    .okvir.upozorenje1 {
+        border-color: red;
     }
 
 .footer {
@@ -309,4 +310,21 @@ textarea {
 
     .upozorenje.greska {
         background-color: rgba(250,128,128,0.7);
+    }
+
+    .upozorenje.obavjest{
+        background-color:rgba(51, 255, 102, 0.7);
+    }
+
+.naslovSaPretragom {
+    margin-top: 35px;
+}
+
+    .naslovSaPretragom h2 {
+        margin: 0;
+    }
+
+    .naslovSaPretragom input[type=text] {
+        max-width: 100%;
+        width: 100%;
     }

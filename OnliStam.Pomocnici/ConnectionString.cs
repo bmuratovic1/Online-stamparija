@@ -71,6 +71,16 @@ namespace OnliStam.Pomocnici
             return string.Format("{0}@{1}", Database, Server);
         }
 
+        public override bool Equals(object obj)
+        {
+            if(obj is ConnectionString)
+            {
+                var c2 = obj as ConnectionString;
+                return c2.Database == Database && c2.Password == Password && c2.Port == Port && c2.Server == Server && c2.UserName == UserName;
+            }
+            return base.Equals(obj);
+        }
+
         #endregion
     }
 }

@@ -69,7 +69,41 @@ namespace Online_Stamparija.Controllers
         // GET: Users/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            if(LogovaniKorisnik.Instanca.Logovan)
+            {
+                var model = _dbPomocnik.IzvrsiProceduru<Korisnik>(Konstante.StoredProcedures.DAJ_KORISNIKA_ID, new Dictionary<string, object> { { "ID", id } });
+                return View("UserProfile", model);
+            }
+            return RedirectToAction("Index");
+        }
+
+        // GET: Users/Details?username=username
+        public ActionResult Profile()
+        {
+            if(LogovaniKorisnik.Instanca.Logovan)
+            {
+                var model = _dbPomocnik.IzvrsiProceduru<Korisnik>(Konstante.StoredProcedures.DAJ_KORISNIKA_UNAME_PASS,
+                    new Dictionary<string, object> { { "Username", LogovaniKorisnik.Instanca.UserName } });
+
+                TempData["BocnaDugmad"] = new List<MetroItem> { 
+                    new Online_Stamparija.Models.MenuItems.MetroItem
+                    {
+                        LinkUrl = "javascript: pokaziSakrij('prosirenaDesnaTraka_lozinka'); pokaziSakrij('obicnaDesnaTraka')",
+                        ImageUrl = "/Images/pass.change.png",
+                        Title="Promjena Lozinke",
+                        MinimumAllowedPosition = PozicijaEnum.Radnik
+                    },                
+                    new Online_Stamparija.Models.MenuItems.MetroItem
+                    {
+                        LinkUrl = "javascript: pokaziSakrij('prosirenaDesnaTraka_slika'); pokaziSakrij('obicnaDesnaTraka')",
+                        ImageUrl = "/Images/picture.change.png",
+                        Title="Promjena Slike",
+                        MinimumAllowedPosition = PozicijaEnum.Radnik
+                    }};
+
+                return View("UserProfile", model);
+            }
+            return RedirectToAction("Index");
         }
 
         // GET: Users/Create

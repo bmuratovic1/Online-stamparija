@@ -6,13 +6,76 @@
 @Html.Partial("Upozorenja/Greska", (TempData["Error"] ?? "").ToString())
 
 <hr />
-<table>
-    <tr>
-        <td>
+
+<div class="desniBarSiroki" id="prosirenaDesnaTraka" style="display:none" onload="javascript:UcitajSveMaterijale();">
+    <hr />
+    <ul>
+        <li>
+            <h3>
+                <a href="javascript: pokaziSakrij('prosirenaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')">
+                    <img src="~/Images/lef.B.png" class="iconButtonBijeli mali" />
+                    <span>Nazad</span>
+                </a>
+            </h3>
+        </li>
+        <li>
+            <div id="noviKorisnik">
+                <ul>
+                    <li>
+                        <h4>Novi posao</h4>
+                    </li>
+                    <li>
+                        <label>Naziv posla</label>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control text-box single-line valid" name="Naziv" id="Naziv"/>
+                    </li>
+                    <li>
+                        <label>Opis posla</label>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control text-box single-line valid" name="Opis" id="Opis" />
+                    </li>
+                    <li>
+                        <label>Vrijeme Trajanja</label>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control text-box single-line valid" name="VrijemeTrajanja" id="VrijemeTrajanja" />
+                    </li>
+                    <li>
+                        <label>Materijal</label>
+                    </li>
+                    <li>
+                        <select class="form-control text-box single-line valid" name="VrstaMaterijala" id="vrstaMaterijala"></select>
+                    </li>
+                    <li>
+                        <label>Količina</label>
+                    </li>
+                    <li>
+                        <input type="text" class="form-control text-box single-line valid" name="KolicinaMaterijala" id="kolicinaMaterijala" />
+                    </li>
+                    <li><label style="color:red" id="lblErrorMessage"></label></li>
+                    <li><input type="button" value="Dodaj" onclick="DodajPosao()" /></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="naslovSaPretragom container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-3">
             <h2>Poslovi</h2>
-        </td>
-    </tr>
-</table>
+        </div>
+        <div class="col-xs-10 col-sm-8">
+            <div style="width:100%">
+                <input type="text" name="tekstZaPretragu" id="tekstZaPretragu" oninput="posloviPretraga(this)" />
+            </div>
+        </div><div class="col-xs-2 col-sm-1 pull-right">
+            <img src="~/Images/search.png" />
+        </div>
+    </div>
+</div>
 
 <div id="poslovi"></div>
 <div id="dodavanjePosla" style="visibility:hidden">
@@ -24,6 +87,8 @@
     var posloviDiv = document.getElementById('poslovi');
     var posaoId = 0;
     var brojUcitavanja = 0;
+
+    UcitajSveMaterijale();
 
     if (posloviDiv.scrollHeight < 30) {
         UcitajPoslove();
@@ -66,6 +131,7 @@
             if (client.readyState == 4 && client.status == 200) {
                 document.getElementById("poslovi").innerHTML = posloviDiv.innerHTML + client.responseText;
                 //document.getElementById('dodavanjePosla').style.visibility = 'hidden';
+                posloviPretraga();
                 brojUcitavanja = brojUcitavanja - 1;
                 if (screen.height > posloviDiv.scrollHeight && brojUcitavanja == 0) {
                     document.getElementById('dodavanjePosla').style.visibility = 'hidden';
@@ -76,5 +142,51 @@
         };
         client.open("GET", "/Posao/DajPosaoPartialView?posaoId=" + currPosaoId, true);
         client.send();
+    }
+
+    function UcitajPosaoNaPocetak(currPosaoId) {
+        var client = new XMLHttpRequest();
+        client.onreadystatechange = function () {
+            if (client.readyState == 4 && client.status == 200) {
+                document.getElementById("poslovi").innerHTML = client.responseText + posloviDiv.innerHTML;
+                //document.getElementById('dodavanjePosla').style.visibility = 'hidden';
+                posloviPretraga();
+                brojUcitavanja = brojUcitavanja - 1;
+                if (screen.height > posloviDiv.scrollHeight && brojUcitavanja == 0) {
+                    document.getElementById('dodavanjePosla').style.visibility = 'hidden';
+                    document.body.style.cursor = 'default';
+                    UcitajPoslove();
+                }
+            }
+        };
+        client.open("GET", "/Posao/DajPosaoPartialView?posaoId=" + currPosaoId, true);
+        client.send();
+    }
+
+    function DodajPosao() {
+        var mypostrequest = new ajaxRequest();
+        mypostrequest.onreadystatechange = function () {
+            if (mypostrequest.readyState == 4) {
+                if (mypostrequest.status == 200 || window.location.href.indexOf("http") == -1) {
+                    var ID = JSON.parse(mypostrequest.responseText);
+                    UcitajPosaoNaPocetak(ID.Message);
+                }
+                else {
+                    alert("An error has occured making the request");
+                }
+            }
+        }
+        var model = {
+            Naziv: encodeURIComponent(document.getElementById("Naziv").value),
+            Opis: encodeURIComponent(document.getElementById("Opis").value),
+            VrijemeTrajanja: encodeURIComponent(document.getElementById("VrijemeTrajanja").value),
+            VrstaMaterijala: encodeURIComponent(document.getElementById("vrstaMaterijala").selectedOptions[0].innerHTML),
+            MaterijalId: encodeURIComponent(document.getElementById("vrstaMaterijala").selectedOptions[0].value),
+            KolicinaMaterijala: encodeURIComponent(document.getElementById("kolicinaMaterijala").value)
+        };
+        mypostrequest.open("POST", "/api/Posao1/CreateJson", true);
+        mypostrequest.setRequestHeader("Content-type", "application/json");
+        //mypostrequest.data = JSON.stringify(model);
+        mypostrequest.send(JSON.stringify(model));
     }
 </script>

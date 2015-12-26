@@ -1,0 +1,9 @@
+﻿@model object
+
+@if(Model != null && Model is string && Model.ToString() != "")
+{
+    <div class="upozorenje obavjest" id="greska">
+        <a href="#" class="close" data-dismiss="alert" style="position:absolute; right:0; top:0; margin:7px">&times;</a>
+        <p>@Model</p>
+    </div>
+}

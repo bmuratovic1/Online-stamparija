@@ -11,7 +11,7 @@ namespace OnliStam.Dashboard.Model
     /// <summary>
     /// 
     /// </summary>
-    class Table: INotifyPropertyChanged
+    public class Table: INotifyPropertyChanged
     {
         #region == Fields ==
 

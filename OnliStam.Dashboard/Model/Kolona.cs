@@ -10,7 +10,7 @@ namespace OnliStam.Dashboard.Model
     /// <summary>
     /// 
     /// </summary>
-    class Kolona: INotifyPropertyChanged
+    public class Kolona: INotifyPropertyChanged
     {
         #region == Fields ==
 

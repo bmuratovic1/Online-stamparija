@@ -154,27 +154,27 @@
         client.send();
     }
 
-    function UcitajSveMaterijale(){
-        var vrsteMaterijalaDiv = document.getElementById('vrstaMaterijala');
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function () {
-            if (xhttp.readyState == 4 && xhttp.status == 200) {
+    //function UcitajSveMaterijale(){
+    //    var vrsteMaterijalaDiv = document.getElementById('vrstaMaterijala');
+    //    var xhttp = new XMLHttpRequest();
+    //    xhttp.onreadystatechange = function () {
+    //        if (xhttp.readyState == 4 && xhttp.status == 200) {
 
-                if (xhttp.responseText == '') {
-                    return;
-                }
-                var materijali = JSON.parse( xhttp.responseText );
-                for (var i = 0; i < materijali.length; i = i + 1) {
-                    var opt = document.createElement('option');
-                    opt.value = materijali[i].ID;
-                    opt.innerHTML = materijali[i].Naziv;
-                    vrsteMaterijalaDiv.appendChild(opt);
-                }
-            }
-        };
-        xhttp.open("GET", "/Materijali/DajSvejson", true);
-        xhttp.send();
-    }
+    //            if (xhttp.responseText == '') {
+    //                return;
+    //            }
+    //            var materijali = JSON.parse( xhttp.responseText );
+    //            for (var i = 0; i < materijali.length; i = i + 1) {
+    //                var opt = document.createElement('option');
+    //                opt.value = materijali[i].ID;
+    //                opt.innerHTML = materijali[i].Naziv;
+    //                vrsteMaterijalaDiv.appendChild(opt);
+    //            }
+    //        }
+    //    };
+    //    xhttp.open("GET", "/Materijali/DajSvejson", true);
+    //    xhttp.send();
+    //}
 
     function DodajMaterijal(){
         var lblErrorMessage = document.getElementById("lblErrorMessage");

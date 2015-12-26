@@ -1,0 +1,177 @@
+﻿@model Online_Stamparija.Models.Korisnik
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function uploadFile() {
+            var lblError = document.getElementById('lblErrorMessage_slika');
+            var loadingImg = document.getElementById('ucitavanje_slika');
+            lblError.innerHTML = '';
+            loadingImg.style.display = 'block';
+            var f = document.getElementById('file').files[0];
+            var fd = new FormData();
+            fd.append("file", f);
+
+            var ajaxRequest = $.ajax({
+                type: "POST",
+                url: '/api/Posao1/UploadFile',
+                contentType: false,// 'application/octet-stream',
+                processData: false,
+                data: fd
+            }).done(function (response) {
+                var path = JSON.parse(response);
+                pokaziPoruku('Slika uspješno promjenjena!', 'obavjest');
+                document.getElementById('profilnaSlika').src = '/Images/Profile/' + path.fileName;
+                loadingImg.style.display = 'none';
+            }).error(function (XMLHttpRequest, textStatus, errorThrown) {
+                pokaziPoruku(XMLHttpRequest.responseJSON.Message, 'greska');
+                loadingImg.style.display = 'none';
+                lblError.innerHTML = XMLHttpRequest.responseJSON.Message;
+            });
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="desniBarSiroki" id="prosirenaDesnaTraka_lozinka" style="display:none">
+        <hr />
+        <ul>
+            <li>
+                <h3>
+                    <a href="javascript: pokaziSakrij('prosirenaDesnaTraka_lozinka'); pokaziSakrij('obicnaDesnaTraka')">
+                        <img src="~/Images/lef.B.png" class="iconButtonBijeli mali" />
+                        <span>Nazad</span>
+                    </a>
+                </h3>
+            </li>
+            <li>
+                <div id="promjenaLozinke">
+                    <ul>
+                        <li>
+                            <h4>Promjena lozinke</h4>
+                        </li>
+                        <li>
+                            <label for="pass0">Stara lozinka</label>
+                            <input type="password" class="form-control" name="pass0" id="pass0" />
+                        </li>
+                        <li>
+                            <div class="fieldWrapper">
+                                <label for="pass1">Nova lozinka:</label>
+                                <input type="password" class="form-control" name="pass1" id="pass1">
+                            </div>
+                        </li>
+                        <li>
+                            <div class="fieldWrapper">
+                                <label for="pass2">Potvrdite novu lozinku:</label>
+                                <input type="password" name="pass2" class="form-control" id="pass2" onkeyup="checkPass(); return false;">
+                                <span id="confirmMessage" class="confirmMessage"></span>
+                            </div>
+                        </li>
+                        <li><label style="color:red" id="lblErrorMessage"></label></li>
+                        <li><input type="button" value="Promjeni" onclick="PromjeniLozinku()" /></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="desniBarSiroki" id="prosirenaDesnaTraka_slika" style="display:none">
+        <hr />
+        <ul>
+            <li>
+                <h3>
+                    <a href="javascript: pokaziSakrij('prosirenaDesnaTraka_slika'); pokaziSakrij('obicnaDesnaTraka')">
+                        <img src="~/Images/lef.B.png" class="iconButtonBijeli mali" />
+                        <span>Nazad</span>
+                    </a>
+                </h3>
+            </li>
+            <li>
+                <div id="promjenaSlike">
+                    <ul>
+                        <li>
+                            <h4>Promjena slike</h4>
+                        </li>
+                        <li>
+                            <input type="file" class="form-control" name="file" id="file" />
+                        </li>
+                        <li><label style="color:red" id="lblErrorMessage_slika"></label></li>
+                        <li style="display:none" id="ucitavanje_slika">
+                            <img src="~/Images/loading.B.gif" />
+                            <label>Učitavanje slike</label>
+                        </li>
+                        <li><input type="button" value="Promjeni" onclick="uploadFile()" /></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <hr />
+    <hr />
+    <table>
+        <tr>
+            <td class="sirokaKolona">
+                <a href="@Url.Action("Index")">
+                    <img src="~/Images/left.C.png" alt="nazad" class="iconButton" title="Nazad" />
+                </a>
+            </td>
+            <td>
+                <h2>Korisnikov Profil</h2>
+            </td>
+        </tr>
+    </table>
+
+    <div style="float:left; width:250px;">
+
+        <div style="width:200px;height:200px;border:1px solid black;background-position:center;">
+            <img id="profilnaSlika" src="http://simpleicon.com/wp-content/uploads/user1.png" alt="Alternate Text" style="width:200px; height:200px" />
+        </div>
+
+        <label class="control-label">Select File</label>
+        <input id="input-1" type="file" class="file">
+    </div>
+
+
+    <div style="border:0.5px solid black;width:300px;margin-left:150px;">
+        <h4>Ime<br /> <span class="label label-info"> @Model.Ime </span></h4><br />
+        <h4>Prezime<br /><span class="label label-info">@Model.Prezime</span></h4> <br />
+        <h4>
+            Pozicija <br />            @switch(Model.Pozicija)
+            {
+                case (int)Online_Stamparija.Models.PozicijaEnum.Administrator:
+                    <img src="~/Images/appbar.scrabble.a.png" class="floatRight" />
+                    break;
+                case (int)Online_Stamparija.Models.PozicijaEnum.Menadzer:
+                <img src="~/Images/appbar.scrabble.m.png" class="floatRight" />
+                    break;
+                case (int)Online_Stamparija.Models.PozicijaEnum.Radnik:
+                <img src="~/Images/appbar.scrabble.r.png" class="floatRight" />
+                    break;
+            }
+        </h4>
+
+
+    </div>
+
+
+</body>

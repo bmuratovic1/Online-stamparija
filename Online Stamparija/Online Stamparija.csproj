@@ -133,6 +133,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterijaliController.cs" />
+    <Compile Include="Controllers\Posao1Controller.cs" />
     <Compile Include="Controllers\PosaoController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -142,6 +143,7 @@
     <Compile Include="Models\LogovaniKorisnik.cs" />
     <Compile Include="Models\Materijal.cs" />
     <Compile Include="Models\MenuItems\MetroItem.cs" />
+    <Compile Include="Models\OPP\NamedMultipartFormDataStreamProvider.cs" />
     <Compile Include="Models\OPP\DodavanjeMaterijala.cs" />
     <Compile Include="Models\OPP\MaterijaliPosao.cs" />
     <Compile Include="Models\Posao.cs" />
@@ -157,20 +159,30 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\about.C.png" />
+    <Content Include="Images\about.png" />
     <Content Include="Images\addUser.B.png" />
     <Content Include="Images\appbar.add.png" />
     <Content Include="Images\appbar.brick.png" />
     <Content Include="Images\appbar.delete.png" />
+    <Content Include="Images\appbar.devcenter.png" />
     <Content Include="Images\appbar.os.android.png" />
     <Content Include="Images\appbar.os.windows.8.png" />
     <Content Include="Images\appbar.scrabble.a.png" />
     <Content Include="Images\appbar.scrabble.m.png" />
     <Content Include="Images\appbar.scrabble.r.png" />
     <Content Include="Images\appbar.shield.png" />
+    <Content Include="Images\basecircle.B.png" />
+    <Content Include="Images\contacts.B.png" />
+    <Content Include="Images\home.B.png" />
+    <Content Include="Images\lef.B.png" />
     <Content Include="Images\left.C.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\logout.B.png" />
     <Content Include="Images\materijali.png" />
+    <Content Include="Images\novi.materijal.B.png" />
     <Content Include="Images\novi.posao.B.png" />
+    <Content Include="Images\pass.change.png" />
     <Content Include="Images\posao.B.png" />
     <Content Include="Images\at.png" />
     <Content Include="Images\basecircle.png" />
@@ -179,8 +191,12 @@
     <Content Include="Images\options.H.png" />
     <Content Include="Images\options.V.B.png" />
     <Content Include="Images\options.V.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\settings.B.png" />
+    <Content Include="Images\settings1.B.png" />
     <Content Include="Images\switch.off.B.png" />
     <Content Include="Images\switch.on.B.png" />
+    <Content Include="Images\u1.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Properties\PublishProfiles\LocalExport.pubxml" />
@@ -239,6 +255,8 @@
     <Content Include="Views\Shared\MenuItems\Dugmad\MetroButton.cshtml" />
     <Content Include="Views\Shared\Posao.cshtml" />
     <Content Include="Views\Shared\Materijal.cshtml" />
+    <Content Include="Views\Users\UserProfile.cshtml" />
+    <Content Include="Views\Shared\Upozorenja\Obavjest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
