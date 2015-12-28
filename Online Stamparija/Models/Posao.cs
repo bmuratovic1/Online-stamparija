@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -21,6 +22,7 @@ namespace Online_Stamparija.Models
 
         public string KolicinaMaterijala { get; set; }
 
+        [UIHint("Status")]
         public int Status { get; set; }
     }
 }

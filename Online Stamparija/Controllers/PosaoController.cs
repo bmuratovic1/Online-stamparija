@@ -15,7 +15,7 @@ namespace Online_Stamparija.Controllers
         // GET: Posao
         public ActionResult Index()
         {
-            if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
+            if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Logovan)
             {
                 var poslovi = new List<Posao>();
                 try
@@ -37,7 +37,7 @@ namespace Online_Stamparija.Controllers
                         LinkUrl = "javascript: pokaziSakrij('prosirenaDesnaTraka'); pokaziSakrij('obicnaDesnaTraka')",
                         ImageUrl = "/Images/novi.posao.B.png",
                         Title="Novi Posao",
-                        MinimumAllowedPosition = PozicijaEnum.Radnik
+                        MinimumAllowedPosition = PozicijaEnum.Menadzer
                     }};
                 return View(poslovi);
             }
@@ -50,7 +50,7 @@ namespace Online_Stamparija.Controllers
         // GET: Posao/Details/5
         public ActionResult Details(int id)
         {
-            if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
+            if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Logovan)
             {
                 var model = new Posao();
                 try
@@ -259,13 +259,16 @@ namespace Online_Stamparija.Controllers
         class DajPosloveModel { public int poc { get; set; } public int kra { get; set; } }
 
         [HttpGet]
-        public ActionResult DajPosaoPartialView(int posaoId)
+        public ActionResult DajPosaoPartialView(int posaoId, bool lite = false)
         {
             try
             {
                 var dbPomocnik = new MySqlPomocnik();
                 var posao = dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.DAJ_POSAO_ID, new Dictionary<string, object> { { "ID", posaoId } });
-                return PartialView("Posao", posao);
+                if(lite)
+                    return PartialView("PosaoLaganiDetalji", posao);
+                else
+                    return PartialView("Posao", posao);
             }
             catch(Exception ex)
             {

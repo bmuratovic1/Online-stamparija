@@ -9,6 +9,11 @@
     <script src="~/Content/funcije.js"></script>
 </head>
 <body>
+    <div id="zamagljenaPozadina" style="width:100%; height:100%; background-color: rgba(128, 128, 128, 0.7); display:none; position:fixed; left:0px; top:0px; z-index: 10;" onclick="javascript: Odmagli()">
+        <div id="sadrzajZamagljenePozadine" style="width:50%; height:70%; background-color:white; display:block; position:fixed; margin-left:25%; margin-top:10%; padding:25px; overflow-y:auto;" onclick="if (event.stopPropagation) { event.stopPropagation(); } event.cancelBubble = true;">
+            
+        </div>
+    </div>
     @Html.Partial("Trake/Vrh")
     <div class="container">
         <div class="row">

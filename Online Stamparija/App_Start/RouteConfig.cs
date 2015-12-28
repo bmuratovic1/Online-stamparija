@@ -19,11 +19,11 @@ namespace Online_Stamparija
                 defaults : new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name : "Posao1",
-                url : "api/{controller}/{action}/{id}",
-                defaults : new { controller = "Posao1", action = "Get", id = UrlParameter.Optional }
-            );
+            //routes.MapRoute(
+            //    name : "Posao1",
+            //    url : "api/{controller}/{action}/{id}",
+            //    defaults : new { controller = "Posao1", action = "Get", id = UrlParameter.Optional }
+            //);
         }
     }
 }

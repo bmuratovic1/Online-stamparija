@@ -6,9 +6,12 @@
 
 <div class="okvir header">
 
-    <h4 class="header">
+    <h4 class="header" id="naslov">
         @Html.DisplayFor(model => model.Naziv)
     </h4>
+    <span style="position:absolute; right:0px; top:0px">
+        @Html.DisplayFor(model => model.Status)
+    </span>
     <hr />
 
     <table class="footer floatRight">
@@ -31,6 +34,25 @@
                     <span>Detalji</span>
                 </a>
             </td>
+            @if(Model.Status == 0)
+            {
+                <td class="sirokaKolona">
+                    <a href="javascript:PreuzmiPosao(@Model.ID, @Online_Stamparija.Models.LogovaniKorisnik.Instanca.ID)">
+                        <img src="~/Images/appbar.control.play.png" alt="at" class="iconButton" />
+                        <span>Preuzmi</span>
+                    </a>
+                </td>
+            }
+            else if(Model.Status == 1)
+            {
+                <td class="sirokaKolona">
+                    <a href="javascript:ZavrsiPosao(@Model.ID, @Online_Stamparija.Models.LogovaniKorisnik.Instanca.ID)">
+                        <img src="~/Images/appbar.control.stop.png" alt="at" class="iconButton" />
+                        <span>Zavrsi</span>
+                    </a>
+                </td>
+            }
+            <td></td>
         </tr>
     </table>
 </div>

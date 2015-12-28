@@ -46,7 +46,7 @@ namespace Online_Stamparija
                     LinkUrl = "/Posao/Index",
                     ImageUrl = "/Images/posao.B.png",
                     Title="Poslovi",
-                    MinimumAllowedPosition = Models.PozicijaEnum.Menadzer
+                    MinimumAllowedPosition = Models.PozicijaEnum.Radnik
                 },
                 new Online_Stamparija.Models.MenuItems.MetroItem
                 {

@@ -29,6 +29,11 @@ namespace Online_Stamparija.Models
         #region --- Properties ---
 
         /// <summary>
+        /// Identifikacija za prijavljenog korisnika
+        /// </summary>
+        public int ID { get; set; }
+
+        /// <summary>
         /// Korisničko ime prijavljenog korisnika
         /// </summary>
         [Required]
@@ -121,6 +126,7 @@ namespace Online_Stamparija.Models
             {
                 if(KriptoPomocnik.VerifyMd5Hash(password, korisnik.Password))
                 {
+                    ID = korisnik.ID;
                     UserName = userName;
                     Email = korisnik.Email;
                     Pozicija = korisnik.Pozicija;

@@ -131,9 +131,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\api\FileController.cs" />
+    <Compile Include="Controllers\api\LozinkaController.cs" />
+    <Compile Include="Controllers\api\PosaoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaterijaliController.cs" />
-    <Compile Include="Controllers\Posao1Controller.cs" />
+    <Compile Include="Controllers\api\Posao1Controller.cs" />
     <Compile Include="Controllers\PosaoController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -164,10 +167,13 @@
     <Content Include="Images\addUser.B.png" />
     <Content Include="Images\appbar.add.png" />
     <Content Include="Images\appbar.brick.png" />
+    <Content Include="Images\appbar.checkmark.thick.png" />
+    <Content Include="Images\appbar.checkmark.thick.unchecked.png" />
     <Content Include="Images\appbar.delete.png" />
     <Content Include="Images\appbar.devcenter.png" />
     <Content Include="Images\appbar.os.android.png" />
     <Content Include="Images\appbar.os.windows.8.png" />
+    <Content Include="Images\appbar.progress.png" />
     <Content Include="Images\appbar.scrabble.a.png" />
     <Content Include="Images\appbar.scrabble.m.png" />
     <Content Include="Images\appbar.scrabble.r.png" />
@@ -257,6 +263,8 @@
     <Content Include="Views\Shared\Materijal.cshtml" />
     <Content Include="Views\Users\UserProfile.cshtml" />
     <Content Include="Views\Shared\Upozorenja\Obavjest.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Status.cshtml" />
+    <Content Include="Views\Shared\PosaoLaganiDetalji.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

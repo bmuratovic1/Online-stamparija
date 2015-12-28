@@ -15,9 +15,15 @@ namespace Online_Stamparija
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name : "DefaultApi",
+                routeTemplate : "api/{controller}/{id}",
+                defaults : new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
+              name : "Posao1",
+              routeTemplate : "api/{controller}/{category}/{id}",
+              defaults : new { controller = "Posao1", category = "Get", id = RouteParameter.Optional }
             );
         }
     }

@@ -7,6 +7,24 @@
     //return false;
 }
 
+function UcitajPosao(currPosaoId, lite) {
+    var client = new XMLHttpRequest();
+    var response = '';
+    client.onreadystatechange = function () {
+        if (client.readyState == 4 && client.status == 200) {
+            //document.getElementById("poslovi").innerHTML = posloviDiv.innerHTML + client.responseText;
+            posloviPretraga();
+            response = client.responseText;
+        }
+    };
+    if (typeof lite !== "undefined")
+        client.open("GET", "/Posao/DajPosaoPartialView?posaoId=" + currPosaoId + '&lite=' + lite, false);
+    else
+        client.open("GET", "/Posao/DajPosaoPartialView?posaoId=" + currPosaoId, false);
+    client.send();
+    return response;
+}
+
 function materijaliPretraga(searchBox) {
     var materijaliDiv = document.getElementById('materijaliDiv');
 
@@ -26,7 +44,11 @@ function materijaliPretraga(searchBox) {
 
 function posloviPretraga() {
     var searchBox = document.getElementById('tekstZaPretragu');
+    if (searchBox == null || typeof searchBox === "undefined")
+        return;
     var posloviDiv = document.getElementById('poslovi');
+    if (posloviDiv == null || typeof posloviDiv === "undefined")
+        return;
 
     var prviStepen = posloviDiv.getElementsByTagName("div"); // children;
     for (var i = 0; i < prviStepen.length; i = i + 1) {
@@ -104,10 +126,97 @@ function pokaziPoruku(poruka, tip) {
             }, 3500);
         }
     };
-    if(tip == 'obavjest')
+    if (tip == 'obavjest')
         xhttp.open("GET", '/Home/GetMessageView?message=' + poruka, true);
     else
         xhttp.open("GET", '/Home/GetMessageView?tip=greska&message=' + poruka, true);
     xhttp.send();
 
+}
+
+function PreuzmiPosao(posaoId, korisnikId) {
+
+    $.ajax({
+        url: "/api/Posao1/PreuzmiPosao/" + posaoId + '/' + korisnikId,
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ korisnikId: korisnikId }),
+        success: function (data, textStatus, jqXHR) {
+            pokaziPoruku('Posao preuzet!', 'obavjest');
+            document.getElementById("poslovi").innerHTML = '';
+            posaoId = 0;
+            brojUcitavanja = 0;
+            UcitajPoslove();
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            pokaziPoruku(jqXHR.responseJSON.Message, 'greska');
+        }
+    });
+}
+
+function Zamagli() {
+    document.getElementById('zamagljenaPozadina').style.display = 'block';
+}
+
+function Odmagli() {
+    document.getElementById('zamagljenaPozadina').style.display = 'none';
+    document.getElementById('sadrzajZamagljenePozadine').innerHTML = '';
+}
+
+function ZavrsiPosao(posaoId, korisnikId) {
+
+    $.ajax({
+        url: "/api/Posao1/ZavrsiPosao/" + posaoId + '/' + korisnikId,
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        //data: JSON.stringify({ korisnikId: korisnikId }),
+        success: function (data, textStatus, jqXHR) {
+            pokaziPoruku('Posao zavrsen!', 'obavjest');
+            document.getElementById("poslovi").innerHTML = '';
+            
+            UcitajPoslove(0);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            pokaziPoruku(jqXHR.responseJSON.Message, 'greska');
+        }
+    });
+}
+
+function PokaziPosloveZaKorisnika(id) {
+    $.ajax({
+        url: "/api/Posao1/DajPosloveZaKorisnika/" + id,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data, textStatus, jqXHR) {
+            Zamagli();
+            var posloviDiv = document.getElementById('sadrzajZamagljenePozadine');
+            var poslovi = JSON.parse(data.Message);
+
+            for(var i =0; i<poslovi.length; i++){
+                posloviDiv.innerHTML += UcitajPosao(poslovi[i].ID, true);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            pokaziPoruku(jqXHR.responseJSON.Message, 'greska');
+        }
+    });
+}
+function PokaziPosloveZaMaterijal(id) {
+    $.ajax({
+        url: "/api/Posao1/DajPosloveZaMaterijal/" + id,
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data, textStatus, jqXHR) {
+            Zamagli();
+            var posloviDiv = document.getElementById('sadrzajZamagljenePozadine');
+            var poslovi = JSON.parse(data.Message);
+
+            for (var i = 0; i < poslovi.length; i++) {
+                posloviDiv.innerHTML += UcitajPosao(poslovi[i].ID, true);
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            pokaziPoruku(jqXHR.responseJSON.Message, 'greska');
+        }
+    });
 }

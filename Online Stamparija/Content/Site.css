@@ -254,7 +254,7 @@ textarea {
 }
 
     .okvir.siroki {
-        min-width: 756px;
+        min-width: 512px;
     }
 
     .okvir.uski {
@@ -264,6 +264,9 @@ textarea {
 
     .okvir.upozorenje1 {
         border-color: red;
+    }
+    .okvir #naslov{
+        margin-right:50px;
     }
 
 .footer {
@@ -294,9 +297,9 @@ textarea {
     }
 
 .upozorenje {
-    position: absolute;
-    left: 0;
-    top: 100px;
+    position: fixed;
+    left: 10px;
+    top: 150px;
     border: 2px solid black;
     padding-top: 25px;
     padding-bottom: 20px;
@@ -328,3 +331,7 @@ textarea {
         max-width: 100%;
         width: 100%;
     }
+body .row{
+    margin-left:0px;
+    margin-right:0px;
+}

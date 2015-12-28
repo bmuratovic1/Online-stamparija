@@ -28,7 +28,7 @@
                         <label>Naziv posla</label>
                     </li>
                     <li>
-                        <input type="text" class="form-control text-box single-line valid" name="Naziv" id="Naziv"/>
+                        <input type="text" class="form-control text-box single-line valid" name="Naziv" id="Naziv" />
                     </li>
                     <li>
                         <label>Opis posla</label>
@@ -94,7 +94,12 @@
         UcitajPoslove();
     }
 
-    function UcitajPoslove() {
+    function UcitajPoslove(pocId) {
+        if (typeof pocId !== "undefined") {
+            posaoId = pocId;
+            brojUcitavanja = pocId;
+        }
+
         var a = (document.body.scrollTop + window.innerHeight);
         if (screen.height > posloviDiv.scrollHeight || document.body.scrollHeight == a) {
             document.getElementById('dodavanjePosla').style.visibility = 'visible';
@@ -111,7 +116,13 @@
                     var ids = xhttp.responseText.split(';');
                     for (var i = 0; i < ids.length; i = i + 1) {
                         brojUcitavanja = brojUcitavanja + 1;
-                        UcitajPosao(ids[i]);
+                        document.getElementById("poslovi").innerHTML += UcitajPosao(ids[i]);
+                        brojUcitavanja = brojUcitavanja - 1;
+                        if (screen.height > posloviDiv.scrollHeight && brojUcitavanja == 0) {
+                            document.getElementById('dodavanjePosla').style.visibility = 'hidden';
+                            document.body.style.cursor = 'default';
+                            UcitajPoslove();
+                        }
                     }
                 }
             };
@@ -125,25 +136,6 @@
         }
     }
 
-    function UcitajPosao(currPosaoId) {
-        var client = new XMLHttpRequest();
-        client.onreadystatechange = function () {
-            if (client.readyState == 4 && client.status == 200) {
-                document.getElementById("poslovi").innerHTML = posloviDiv.innerHTML + client.responseText;
-                //document.getElementById('dodavanjePosla').style.visibility = 'hidden';
-                posloviPretraga();
-                brojUcitavanja = brojUcitavanja - 1;
-                if (screen.height > posloviDiv.scrollHeight && brojUcitavanja == 0) {
-                    document.getElementById('dodavanjePosla').style.visibility = 'hidden';
-                    document.body.style.cursor = 'default';
-                    UcitajPoslove();
-                }
-            }
-        };
-        client.open("GET", "/Posao/DajPosaoPartialView?posaoId=" + currPosaoId, true);
-        client.send();
-    }
-
     function UcitajPosaoNaPocetak(currPosaoId) {
         var client = new XMLHttpRequest();
         client.onreadystatechange = function () {
@@ -154,6 +146,7 @@
                 brojUcitavanja = brojUcitavanja - 1;
                 if (screen.height > posloviDiv.scrollHeight && brojUcitavanja == 0) {
                     document.getElementById('dodavanjePosla').style.visibility = 'hidden';
+                    pokaziPoruku('Posao dodan!', 'obavjest');
                     document.body.style.cursor = 'default';
                     UcitajPoslove();
                 }
@@ -184,7 +177,7 @@
             MaterijalId: encodeURIComponent(document.getElementById("vrstaMaterijala").selectedOptions[0].value),
             KolicinaMaterijala: encodeURIComponent(document.getElementById("kolicinaMaterijala").value)
         };
-        mypostrequest.open("POST", "/api/Posao1/CreateJson", true);
+        mypostrequest.open("POST", "/api/Posao", true);
         mypostrequest.setRequestHeader("Content-type", "application/json");
         //mypostrequest.data = JSON.stringify(model);
         mypostrequest.send(JSON.stringify(model));

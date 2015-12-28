@@ -1,6 +1,4 @@
-﻿using Online_Stamparija.Models;
-using Online_Stamparija.Models.OPP;
-using OnliStam.Pomocnici;
+﻿using OnliStam.Pomocnici;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,57 +7,20 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Web;
 using System.Web.Http;
-using System.Web.Script.Serialization;
 
-namespace Online_Stamparija.Controllers
+namespace Online_Stamparija.Controllers.api
 {
-    public class Posao1Controller: ApiController
+    public class FileController : ApiController
     {
+        [System.Web.Http.HttpGet]
         public HttpResponseMessage Get()
         {
-            return Request.CreateErrorResponse(System.Net.HttpStatusCode.OK, "");
+            return Request.CreateErrorResponse(System.Net.HttpStatusCode.OK, "This was triggered by GET request");
         }
 
-        // POST: Posao/CreateJson
-        [HttpPost]
-        public HttpResponseMessage CreateJson([System.Web.Http.FromBody] Posao model)
-        {
-            //if(Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 1 || Online_Stamparija.Models.LogovaniKorisnik.Instanca.Pozicija == 2)
-            //{
-            try
-            {
-                var dbPomocnik = new MySqlPomocnik();
-                double potrebnaKolicinaMaterijala = Convert.ToDouble(model.KolicinaMaterijala);
-
-                var materijal = dbPomocnik.IzvrsiProceduru<Materijal>(Konstante.StoredProcedures.DAJ_MATERIJAL_ID, new Dictionary<string, object> { { "ID", model.MaterijalId } });
-
-                if(materijal.Kolicina < potrebnaKolicinaMaterijala)
-                {
-                    return Request.CreateErrorResponse(System.Net.HttpStatusCode.BadRequest, "Nedovoljno raspoloživog materijala!");
-                }
-                materijal.Kolicina -= potrebnaKolicinaMaterijala;
-
-                model.Naziv = HttpUtility.UrlDecode(model.Naziv);
-                model.Opis = HttpUtility.UrlDecode(model.Opis);
-                model.VrstaMaterijala = HttpUtility.HtmlDecode(model.VrstaMaterijala);
-                dbPomocnik.IzvrsiProceduru(Konstante.StoredProcedures.IZMJENI_MATERIJAL, materijal);
-
-                model.VrstaMaterijala = materijal.Naziv;
-                var response = dbPomocnik.IzvrsiProceduru<Posao>(Konstante.StoredProcedures.DODAJ_POSAO, model);
-
-                return Request.CreateErrorResponse(System.Net.HttpStatusCode.OK, response.Rows[0]["ID"].ToString());
-            }
-            catch(Exception ex)
-            {
-                return Request.CreateErrorResponse(System.Net.HttpStatusCode.BadRequest, ex.Message);
-            }
-        }
-
-
-        [HttpPost]
-        public async System.Threading.Tasks.Task<HttpResponseMessage> UploadFile(string id)
+        [System.Web.Http.HttpPost]
+        public async System.Threading.Tasks.Task<HttpResponseMessage> UploadFile([FromBody]string id)
         {
             var supportedTypes = new List<string> { "png", "jpg", "jpeg", "gif" };
             if(!Request.Content.IsMimeMultipartContent())
@@ -94,7 +55,7 @@ namespace Online_Stamparija.Controllers
 
                     using(var fileStream = File.Create(fullpath))
                     {
-                        dataStream.Seek(0, SeekOrigin.Begin);
+                        dataStream.Seek(0, System.IO.SeekOrigin.Begin);
                         dataStream.CopyTo(fileStream);
                     }
                 }
@@ -135,21 +96,6 @@ namespace Online_Stamparija.Controllers
             }
             return fileName;
 
-        }
-    }
-    public static class JSONHelper
-    {
-        public static string ToJSON(this object obj)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            return serializer.Serialize(obj);
-        }
-
-        public static string ToJSON(this object obj, int recursionDepth)
-        {
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            serializer.RecursionLimit = recursionDepth;
-            return serializer.Serialize(obj);
         }
     }
 }

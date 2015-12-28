@@ -1,0 +1,18 @@
+﻿@model System.Int32
+
+@switch(Model)
+{
+    case 0:
+        <img src="~/Images/appbar.checkmark.thick.unchecked.png" style="height:76px;" title="Novi posao"/>
+        break;
+    case 1:
+    <img src="~/Images/appbar.fullscreen.png" style="height:76px;" title="Preuzet posao"/>
+        break;
+    case 2:
+    <img src="~/Images/appbar.checkmark.thick.png" style="height:76px;" title="Završen posao"/>
+        break;
+    default:
+    <img src="~/Images/appbar.checkmark.cross.png" style="height:76px;" title="Otkazan posao"/>
+        break;
+}
+<input type='hidden' name='@ViewData.ModelMetadata.PropertyName' id='@ViewData.ModelMetadata.PropertyName' value='@Model' />

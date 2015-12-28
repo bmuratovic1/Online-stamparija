@@ -189,7 +189,7 @@ WHERE ID = @ID;", new List<string> { "ID", "Naziv", "Opis", "Kolicina" });
                 @"SELECT MIN(ID) as ID 
                 FROM poslovi 
                 GROUP BY Naziv 
-                ORDER BY 1 DESC 
+                ORDER BY Status ASC 
                 LIMIT @poc, @kra",
                                  new List<string> { "poc", "kra" }
                                  );
@@ -200,8 +200,62 @@ WHERE ID = @ID;", new List<string> { "ID", "Naziv", "Opis", "Kolicina" });
                 INNER JOIN poslovi p2 ON p1.naziv = p2.naziv
                 INNER JOIN Materijali m on m.ID = p2.materijalId
                 WHERE p1.ID = @PosaoId",
-                                                             new List<string> { "PosaoId"}
+                                                             new List<string> { "PosaoId" }
                 );
+            public static readonly SqlUpit PREUZMI_POSAO = new SqlUpit("PreuzmiPosao",
+                @"INSERT INTO promjeneposlova (
+                    staroStanje,
+                    novoStanje,
+                    korisnikId,
+                    posaoId)
+                SELECT
+                    Status,
+                    1,
+                    @KorisnikId,
+                    ID
+                FROM Poslovi
+                WHERE ID = @PosaoId;
+
+                UPDATE Poslovi
+                SET Status = 1
+                WHERE ID = @PosaoId;",
+                     new List<string> { "PosaoId", "KorisnikId" });
+
+            public static readonly SqlUpit ZAVRSI_POSAO = new SqlUpit("PreuzmiPosao",
+                @"INSERT INTO promjeneposlova (
+                    staroStanje,
+                    novoStanje,
+                    korisnikId,
+                    posaoId)
+                SELECT
+                    Status,
+                    2,
+                    @KorisnikId,
+                    ID
+                FROM Poslovi
+                WHERE ID = @PosaoId;
+
+                UPDATE poslovi
+                SET Status = 2
+                WHERE ID = @PosaoId;",
+                     new List<string> { "PosaoId", "KorisnikId" });
+
+            public static SqlUpit DAJ_POSLOVE_KORISNIK = new SqlUpit("",
+                @"SELECT p.*
+                FROM poslovi p
+                   INNER JOIN promjeneposlova pp
+                   ON pp.posaoId = p.ID
+                WHERE pp.KorisnikId = @KorisnikId
+                ORDER BY pp.Datum DESC"
+                , new List<string> { "KorisnikId" });
+
+            public static SqlUpit DAJ_POSLOVE_MATERIJAL = new SqlUpit("",
+                @"SELECT Naziv, MAX(ID) as ID
+                FROM poslovi
+                WHERE MaterijalId = @MaterijalId
+                GROUP BY Naziv
+                ORDER BY VrijemeKreiranja DESC"
+                , new List<string> { "MaterijalId" });
         }
 
         public struct EMailTemplates
