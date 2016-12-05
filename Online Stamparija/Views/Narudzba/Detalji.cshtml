@@ -1,0 +1,168 @@
+﻿@model Online_Stamparija.Models.Narudzba
+
+@{
+    ViewBag.Title = "Detalji";
+    }
+    <hr />
+<h2>Detalji</h2>
+
+<div>
+    <h4>Narudzba</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NazivKorisnika)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NazivKorisnika)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Adresa)
+        </dt>
+
+        <dd>
+                        @Html.DisplayFor(model => model.Adresa)
+                        <div style="width:640px; height:480px" id="map"></div>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrojTelefona)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrojTelefona)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Opis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Opis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Napomena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Napomena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.brojKomada)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.brojKomada)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.vrijemeIsporuke)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.vrijemeIsporuke)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NazivFajla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NazivFajla)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+<div id="map"></div>
+<script>
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 15
+        });
+        var geocoder;
+        geocoder = new google.maps.Geocoder();
+        var address = '@Model.Adresa';
+        geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+        aps.Marker({
+            position: p1,
+            map: map
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUUxg8MQmXjDhmJfw3FR-wXaQLHX7rv4o&callback=initMap"
+        async defer></script>
+
+
+@*<h1>My First Google Map</h1>
+
+<div id="map" style="width:100%;height:500px"></div>
+
+<script>
+    function myMap() {
+        var mapCanvas = document.getElementById("map");
+        var mapOptions = {
+            center: new google.maps.LatLng(51.5, -0.2),
+            zoom: 10
+        }
+        var map = new google.maps.Map(mapCanvas, mapOptions);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUUxg8MQmXjDhmJfw3FR-wXaQLHX7rv4o&callback=myMap"></script>*@
+
+
+
+
+
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3Hs2OB4DiSoCkw87MsWTLR_eO1SSCE00&callback=initMap" async defer></script>
+<script type="text/javascript">
+    window.onload = function () {
+        var location = new google.maps.LatLng(11,11);
+        var mapOptions = {
+            //give latitude and long
+            center: location,
+            zoom: 15,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        var infoWindow = new google.maps.InfoWindow();
+        var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+        //give latitude and long
+        var myLatLng = location;
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map
+        });
+    }
+</script>
+
+<div id="dvMap" style="width: 100%; height: 100%">*@
